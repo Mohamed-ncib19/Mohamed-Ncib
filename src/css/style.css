@@ -1,14 +1,45 @@
+/*Font Raleway*/
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Raleway:ital,wght@1,200&display=swap');
+body{
+    font-family: 'Raleway', sans-serif;
+}
+/*Design section*/
+.hoverAnimationDesign:hover{
+    cursor: pointer;
+}
 .hoverAnimationDesign:hover .designIcon{
-    color: #6947ef;
-    
+    color: #ffffff;
     
 }
+
+.hoverAnimationDesign:hover .designText{
+    color: #6947ef;
+}
+
+
+/*Front section*/
+.hoverAnimationFront:hover{
+    cursor: pointer;
+}
 .hoverAnimationFront:hover .frontIcon{
+    color: #f3f3f3;
+}
+.hoverAnimationFront:hover .frontText{
+    color: #6947ef;
+}
+
+
+/*BackEnd section*/
+.hoverAnimationBack:hover{
+    cursor: pointer;
+}
+.hoverAnimationBack:hover .backText{
     color: #6947ef;
 }
 .hoverAnimationBack:hover .backIcon{
-    color: #6947ef;
+    color: #ffffff;
 }
+
 .contactButton:hover .hoverring{
     color: #6947ef;
     

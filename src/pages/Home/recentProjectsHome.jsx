@@ -44,7 +44,7 @@ const RecentProjectsHome = () => {
 
         <div id='project' className="flex flex-col items-center w-[70%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] transition-all duration-500">
           <div className='flex flex-row justify-around items-center w-[100%]'>
-            <p className='text-[20px]'>StoryTime</p>
+            <p className='text-[20px]'>Weather APP</p>
             <div className='bg-[#6947ef] rounded-md text-white w-[30%] text-center hover:bg-[#7355eb] hover:text-[#0F0F0F]'>
               <a href="/" className='transition-all duration-500 cursor-pointer'>Live Preview</a>
             </div>
@@ -57,7 +57,7 @@ const RecentProjectsHome = () => {
 
         <div id='project' className="flex flex-col items-center w-[70%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500">
           <div className='flex flex-row justify-around items-center w-[100%]'>
-            <p className='text-[20px]'>StoryTime</p>
+            <p className='text-[20px]'>Password Generator</p>
             <div className='bg-[#6947ef] rounded-md text-white w-[30%] text-center hover:bg-[#7355eb] hover:text-[#0F0F0F]'>
               <a href="https://mohamed-ncib19.github.io/Password-generator/" className='transition-all duration-500 cursor-pointer'>Live Preview</a>
             </div>
@@ -70,8 +70,8 @@ const RecentProjectsHome = () => {
 
 
       </div>
-    <div className='flex flex-row justify-center items-center text-center m-auto w-[15%] p-2 rounded-xl bg-[#6947ef] text-white hover:bg-[#7658eb] hover:text-[#0F0F0F] transition-all duration-500'>
-      <a href="/Portfolio/Works" className='w-[100%]'>View More</a>
+    <div className='flex flex-row justify-center items-center text-center m-auto md:w-[20%] w-[30%] p-2 rounded-xl bg-[#6947ef] text-white hover:bg-[#7658eb] hover:text-[#0F0F0F] transition-all duration-500'>
+      <a href="/Works" className='w-[100%]'>View More</a>
       <ViewMoreIcon className="text-[30px]" />
     </div>
     </div>

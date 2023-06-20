@@ -13,10 +13,10 @@ const Skills = () => {
       </div>
       <div className="flex flex-col md:flex-row justify-start md:justify-center float-none  pt-[4%] space-x-0 md:space-x-5 items-center m-auto space-y-4 md:space-y-0 transition-all duration-500  ">
  
-        <div id="Design" className="bg-[#212121] w-[90%] h-[50vh] flex flex-col gap-8  p-[20px] md:w-[30%] transition-all duration-500 shadow-md hover:shadow-[#6947ef] hoverAnimationDesign">
-          <Design className='text-[60px] transition-all duration-500 designIcon' />
-          <h2 className="text-[30px] ">Design</h2>
-          <div className="flex flex-col justify-center items-start space-y-5">
+        <div id="Design" className="bg-[#181818]  rounded-3xl w-[90%] h-[60vh] flex flex-col gap-8  p-[20px] lg:w-[30%] transition-all duration-500 shadow-md hover:shadow-[#6947ef] hoverAnimationDesign backdrop-blur-3xl">
+          <Design className='text-[60px] transition-all duration-500 designIcon text-[#6947ef]' />
+          <h2 className="text-[30px]  designText transition-all duration-500  ">Design</h2>
+          <div className="flex flex-col justify-center designText items-start space-y-5 transition-all duration-500 ">
             <div className="flex flex-row items-center ">
               <ListeArrow />
               <p>Figma</p>
@@ -28,10 +28,10 @@ const Skills = () => {
           </div>
         </div>
 
-        <div id="Front-End" className="bg-[#212121] w-[90%] h-[50vh] flex flex-col justify-start items-start  gap-12 md:gap-8  p-[20px] md:w-[30%] transition-all duration-500 shadow-md hover:shadow-[#6947ef] hoverAnimationFront">
-          <Coding className='text-[60px] transition-all duration-500 frontIcon' />
-          <h2 className="text-[30px] m-0">Front End</h2>
-          <div className="flex flex-col justify-center items-start md:space-y-1 space-y-3">
+        <div id="Front-End" className="bg-[#181818] rounded-3xl w-[90%] h-[60vh] flex flex-col justify-start items-start  gap-12 md:gap-8  p-[20px] lg:w-[30%] transition-all duration-500 shadow-md hover:shadow-[#6947ef] hoverAnimationFront">
+          <Coding className='text-[60px] transition-all duration-500 frontIcon text-[#6947ef]' />
+          <h2 className="text-[30px] m-0 frontText transition-all duration-500  ">Front End</h2>
+          <div className="flex flex-col justify-center frontText items-start md:space-y-1 space-y-3 transition-all duration-500 ">
             <div className="flex flex-row items-center ">
               <ListeArrow />
               <p>React</p>
@@ -60,10 +60,10 @@ const Skills = () => {
           </div>
         </div>
 
-        <div id="Back-End" className="bg-[#212121] w-[90%] h-[50vh]  flex flex-col gap-8  p-[20px] md:w-[30%] transition-all duration-500 shadow-md hover:shadow-[#6947ef] hoverAnimationBack">
-          <BackEndIcon  className='text-[60px] transition-all duration-500 backIcon'/>
-          <h2 className="text-[30px]">Back</h2>
-          <div className="flex flex-col justify-center items-start space-y-5">
+        <div id="Back-End" className="bg-[#181818] rounded-3xl w-[90%] h-[60vh]  flex flex-col gap-8  p-[20px] lg:w-[30%] transition-all duration-500 shadow-md hover:shadow-[#6947ef] hoverAnimationBack">
+          <BackEndIcon  className='text-[60px] transition-all duration-500 backIcon  text-[#6947ef]'/>
+          <h2 className="text-[30px] backText transition-all duration-500 ">Back</h2>
+          <div className="flex flex-col justify-center items-start space-y-5 backText transition-all duration-500 ">
             <div className="flex flex-row items-center ">
               <ListeArrow />
               <p>Sql</p>
