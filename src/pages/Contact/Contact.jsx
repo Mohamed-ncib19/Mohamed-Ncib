@@ -24,7 +24,7 @@ const Contact = () => {
        setName("");
        setMail("");
        setFeedback("");
-       Navigate("/Thank-you")
+       Navigate("/Portfolio/Thank-you")
         
     }
     return ( 
