@@ -1,0 +1,27 @@
+.hoverAnimationDesign:hover .designIcon{
+    color: #6947ef;
+    
+    
+}
+.hoverAnimationFront:hover .frontIcon{
+    color: #6947ef;
+}
+.hoverAnimationBack:hover .backIcon{
+    color: #6947ef;
+}
+.contactButton:hover .hoverring{
+    color: #6947ef;
+    
+}
+.contactButton:hover{
+    cursor: pointer;
+    
+}
+.contactButton:hover .hoverringIcon{
+    color: #ffffff;
+    
+}
+.contactButton:hover .circleInside{
+    background-color: #1b1b1b;
+    
+}
