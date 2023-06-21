@@ -26,7 +26,7 @@ const Contact = () => {
        setName("");
        setMail("");
        setFeedback("");
-       Navigate("/Mohamed-Ncib/Thank-you")
+       Navigate("/Thank-you")
         
     }
     return ( 

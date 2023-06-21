@@ -71,7 +71,7 @@ const RecentProjectsHome = () => {
 
       </div>
     <div className='flex flex-row justify-center items-center text-center m-auto md:w-[20%] w-[30%] p-2 rounded-xl bg-[#6947ef] text-white hover:bg-[#7658eb] hover:text-[#0F0F0F] transition-all duration-500'>
-      <a href="/Mohamed-Ncib/Works" className='w-[100%]'>View More</a>
+      <a href="/Works" className='w-[100%]'>View More</a>
       <ViewMoreIcon className="text-[30px]" />
     </div>
     </div>
