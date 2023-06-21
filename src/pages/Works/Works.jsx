@@ -207,7 +207,7 @@ const Works = () => {
       <button
         className="flex flex-row justify-center items-center text-center m-auto lg:w-[30%] w-[50%] p-2 rounded-xl font-semibold bg-[#6947ef] text-white hover:bg-[#7658eb] hover:text-[#0F0F0F] transition-all duration-500"
         onClick={() => {
-          Navigate("/Contact");
+          Navigate("/Mohamed-Ncib/Contact");
         }}
       >
         <p className="text-center p-2">Hire Me</p>

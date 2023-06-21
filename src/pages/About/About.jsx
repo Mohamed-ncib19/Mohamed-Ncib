@@ -37,7 +37,7 @@ const About = () => {
         
       <button className="flex flex-row justify-center items-center text-center m-auto lg:w-[30%] w-[50%] p-2 rounded-xl bg-[#6947ef] text-white hover:bg-[#6947ef] font-medium hover:text-[#0F0F0F] transition-all duration-500"
         onClick={()=>{
-          Navigate('/Works')
+          Navigate('/Mohamed-Ncib/Works')
         }}
       >
         <p className="text-center p-2 font-semibold">Check Projects</p>
