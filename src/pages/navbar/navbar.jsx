@@ -16,7 +16,7 @@ const Navbar = () => {
                 ()=>{
                     if(!isOpen){
                         setIsOpen(true);
-                        Navigate('/Slide-Bar')
+                        Navigate('/Mohamed-Ncib/Slide-Bar')
                     }else{
                         setIsOpen(false)
                     }

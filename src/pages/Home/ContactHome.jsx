@@ -3,7 +3,7 @@ import ViewMoreIcon from "../icons/viewMore";
 const ContactHome = () => {
   return (
     <div className="text-white bg-[#0F0F0F] pb-[15%]">
-      <a href="/Contact">
+      <a href="/Mohamed-Ncib/Contact">
       <div className="w-[50%] m-auto md:w-[30%] p-8">
         <h1 className="text-center text-[2rem] transition-all duration-500 ">
           Contact Me
