@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/Mohamed-ncib19/Mohamed-Ncib/",
+  "homepage": "https://github.com/Mohamed-ncib19/Mohamed-Ncib",
+  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
