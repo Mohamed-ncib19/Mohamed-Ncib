@@ -27,7 +27,7 @@ const Hero = () => {
           Hello world, Im Mohamed Ncib, a Computer Science Student, Web Developer, and Art Lover.
         </p>
         <button className="text-[40px]">
-          <Link to="/#Skills" smooth>
+          <Link to="/Mohamed-Ncib/#Skills" smooth>
             <ArrowDown />
           </Link>
         </button>
