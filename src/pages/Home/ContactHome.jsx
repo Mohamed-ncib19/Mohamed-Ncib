@@ -1,9 +1,9 @@
+import { Link } from "react-router-dom";
 import ViewMoreIcon from "../icons/viewMore";
-
 const ContactHome = () => {
   return (
     <div className="text-white bg-[#0F0F0F] pb-[15%]">
-      <a href="/Contact">
+      <Link to="/Contact">
       <div className="w-[50%] m-auto md:w-[30%] p-8">
         <h1 className="text-center text-[2rem] transition-all duration-500 ">
           Contact Me
@@ -18,7 +18,7 @@ const ContactHome = () => {
                 <ViewMoreIcon className='text-[60px] text-[#6947ef] hoverringIcon transition-all duration-500' />
             </div>
       </div>
-      </a>
+      </Link>
     </div>
   );
 };

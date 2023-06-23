@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CloseIcon from "../icons/CloseIcon.jsx"
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const SlideBar = () => {
     const [isOpen,setIsOpen]=useState(false);
     const Navigate = useNavigate();
@@ -26,9 +27,16 @@ const SlideBar = () => {
             ><CloseIcon className="text-[30px] text-white" /></button>
           </nav>
           <div className=" h-screen flex flex-col justify-center items-center gap-6 text-white text-[40px] -mt-[90px]">
-            <h1 className="cursor-pointer hover:text-[#6947ef] transition-all duration-500"><a href="/About-Me">About</a></h1>
-            <h1 className="cursor-pointer hover:text-[#6947ef] transition-all duration-500"><a href="/Works">Works</a></h1>
-            <h1 className="cursor-pointer hover:text-[#6947ef] transition-all duration-500"><a href="/Contact">Contact</a></h1>
+            <Link to="/About-Me" smooth>
+            <h1 className="cursor-pointer hover:text-[#6947ef] transition-all duration-500">About</h1>
+            </Link>
+            <Link to="/Works">
+            <h1 className="cursor-pointer hover:text-[#6947ef] transition-all duration-500">Works</h1>
+
+            </Link>
+            <Link to="/Contact">
+            <h1 className="cursor-pointer hover:text-[#6947ef] transition-all duration-500">Contact</h1>
+            </Link>
           </div>
           </div>
           

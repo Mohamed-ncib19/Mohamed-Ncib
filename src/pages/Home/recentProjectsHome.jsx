@@ -4,6 +4,7 @@ import FirstProjectImage from '../../assets/Stroy-Time.png'
 import secondProject from "../../assets/IEEE-SIGHT.png"
 import thirdProject from "../../assets/weather-app.png"
 import forthProject from "../../assets/pass-generator.png"
+import { Link } from 'react-router-dom'
 const RecentProjectsHome = () => {
   return (
     <div className='bg-[#0F0F0F]'>
@@ -71,7 +72,7 @@ const RecentProjectsHome = () => {
 
       </div>
     <div className='flex flex-row justify-center items-center text-center m-auto md:w-[20%] w-[30%] p-2 rounded-xl bg-[#6947ef] text-white hover:bg-[#7658eb] hover:text-[#0F0F0F] transition-all duration-500'>
-      <a href="/Works" className='w-[100%]'>View More</a>
+        <Link to="/Works" className='w-[100%]'><p>View More</p></Link>
       <ViewMoreIcon className="text-[30px]" />
     </div>
     </div>
