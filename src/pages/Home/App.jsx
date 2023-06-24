@@ -14,7 +14,7 @@ function AppContent() {
 
   return (
     <Routes location={location}>
-      <Route path="/Mohamed-ncib" element={<HomePage />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/Slide-Bar" element={<SlideBar />} />
       <Route path="/About-Me" element={<About />} />
       <Route path="/Works" element={<Works />} />
