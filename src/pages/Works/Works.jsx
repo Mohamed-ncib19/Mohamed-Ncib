@@ -9,6 +9,9 @@ import GithubIcon from "../icons/githubIcon.jsx";
 import { useNavigate } from "react-router-dom";
 import FrontEndIcon from "../icons/FrontEndIcon.jsx"
 import Footer from "../footer/footer";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 const Works = () => {
   const Navigate = useNavigate();
   return (
@@ -21,11 +24,11 @@ const Works = () => {
     <h2 className="text-[35px] p-6 underline">Recent Projects</h2>
       <div
         id="Projects"
-        className=" md:grid md:gap-8 md:grid-cols-2 space-y-3 m-auto grid-rows-1 transition-all duration-500"
+        className=" md:grid md:gap-8 md:grid-cols-2 space-y-7 m-auto grid-rows-2 p-2s transition-all duration-500"
       >
         <div
           id="project"
-          className="flex flex-col items-center w-[70%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
+          className="flex flex-col items-center gap-2 w-[90%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
         >
           <div className="flex flex-row justify-around items-center w-[100%]">
             <p className="text-[20px]">StoryTime</p>
@@ -45,8 +48,9 @@ const Works = () => {
             </a>
           </div>
           <div className="w-[100%] m-auto">
-            <img
+            <LazyLoadImage
               src={FirstProjectImage}
+              effect='blur'
               alt="Project-Photo"
               className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto"
             />
@@ -55,7 +59,7 @@ const Works = () => {
 
         <div
           id="project"
-          className="flex flex-col items-center w-[70%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
+          className="flex flex-col items-center gap-2 w-[90%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
         >
           <div className="flex flex-row justify-around items-center w-[100%]">
             <p className="text-[20px]">IEEE SIGHT ESSTHS</p>
@@ -75,8 +79,9 @@ const Works = () => {
             </a>
           </div>
           <div className="w-[100%] m-auto">
-            <img
+            <LazyLoadImage
               src={secondProject}
+              effect='blur'
               alt="Project-Photo"
               className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto"
             />
@@ -85,7 +90,7 @@ const Works = () => {
 
         <div
           id="project"
-          className="flex flex-col items-center w-[70%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] transition-all duration-500"
+          className="flex flex-col items-center gap-2 w-[90%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] transition-all duration-500"
         >
           <div className="flex flex-row justify-around items-center w-[100%]">
             <p className="text-[20px]">Weather APP</p>
@@ -105,8 +110,9 @@ const Works = () => {
             </a>
           </div>
           <div className="w-[100%] m-auto">
-            <img
+            <LazyLoadImage
               src={thirdProject}
+              effect='blur'
               alt="Project-Photo"
               className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto"
             />
@@ -115,7 +121,7 @@ const Works = () => {
 
         <div
           id="project"
-          className="flex flex-col items-center w-[70%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
+          className="flex flex-col items-center gap-2 w-[90%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
         >
           <div className="flex flex-row justify-around items-center w-[100%]">
             <p className="text-[20px]">Password Generator</p>
@@ -135,8 +141,9 @@ const Works = () => {
             </a>
           </div>
           <div className="w-[100%] m-auto">
-            <img
+            <LazyLoadImage
               src={forthProject}
+              effect='blur'
               alt="Project-Photo"
               className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto"
             />
@@ -145,7 +152,7 @@ const Works = () => {
 
         <div
           id="project"
-          className="flex flex-col items-center w-[70%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
+          className="flex flex-col items-center gap-2 w-[90%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
         >
           <div className="flex flex-row justify-around items-center w-[100%]">
             <p className="text-[20px]">Rock Paper Scissors</p>
@@ -165,8 +172,9 @@ const Works = () => {
             </a>
           </div>
           <div className="w-[100%] m-auto">
-            <img
+            <LazyLoadImage
               src={fifthProject }
+              effect='blur'
               alt="Project-Photo"
               className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto"
             />
@@ -175,7 +183,7 @@ const Works = () => {
 
         <div
           id="project"
-          className="flex flex-col items-center w-[70%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
+          className="flex flex-col items-center gap-2 w-[90%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
         >
           <div className="flex flex-row justify-around items-center w-[100%]">
             <p className="text-[20px]">Random Quote Generator</p>
@@ -195,8 +203,9 @@ const Works = () => {
             </a>
           </div>
           <div className="w-[100%] m-auto">
-            <img
+            <LazyLoadImage
               src={sixthProject}
+              effect='blur'
               alt="Project-Photo"
               className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto"
             />

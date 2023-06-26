@@ -28,8 +28,8 @@ const Skills = () => {
           </div>
         </div>
 
-        <div id="Front-End" className="bg-[#181818] rounded-3xl w-[90%] h-[60vh] flex flex-col justify-start items-start  gap-12 md:gap-8  p-[20px] lg:w-[30%] transition-all duration-500 shadow-md hover:shadow-[#6947ef] hoverAnimationFront">
-          <Coding className='text-[60px] transition-all duration-500 frontIcon text-[#6947ef]' />
+        <div id="Front-End" className="bg-[#181818] rounded-3xl w-[90%] h-[60vh] flex flex-col justify-start items-start  gap-8 md:gap-8  p-[20px] lg:w-[30%] transition-all duration-500 shadow-md hover:shadow-[#6947ef] hoverAnimationFront">
+          <Coding className='lg:text-[60px] text-[50px] transition-all duration-500 frontIcon text-[#6947ef]' />
           <h2 className="text-[30px] m-0 frontText transition-all duration-500  ">Front End</h2>
           <div className="flex flex-col justify-center frontText items-start md:space-y-1 space-y-3 transition-all duration-500 ">
             <div className="flex flex-row items-center ">

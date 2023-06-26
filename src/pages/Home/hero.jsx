@@ -24,7 +24,7 @@ const Hero = () => {
           Mohamed<br></br> Ncib
         </h1>
         <p>
-          Hello world, Im Mohamed Ncib, a Computer Science Student, Web Developer, and Art Lover.
+          Hello world, Im Mohamed Ncib, a Computer Science Student, Web Designer , Web Developer and Art Lover.
         </p>
         <button className="text-[40px]">
           <Link to="/#Skills" smooth>
