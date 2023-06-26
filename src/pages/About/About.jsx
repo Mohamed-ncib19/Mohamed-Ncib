@@ -7,7 +7,7 @@ import DownloadIcon from "../icons/download.jsx"
 import { useNavigate } from "react-router-dom";
 import Resume from '../../assets/PDF/Resume 2022-2023.pdf'
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import PlaceHolderImage from "../../assets/Me_LowRes.png"
+import PlaceHolderImage from "../../assets/ME_LowRes.png"
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const About = () => {
