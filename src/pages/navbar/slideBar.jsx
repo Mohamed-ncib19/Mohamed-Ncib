@@ -6,7 +6,7 @@ const SlideBar = () => {
     const [isOpen,setIsOpen]=useState(false);
     const Navigate = useNavigate();
     return ( 
-        <div className="bg-[#0F0F0F]  bg-fixed h-full md:bg-cover m-auto" >
+        <div id="slideBarContainer" className="bg-[#0F0F0F]  bg-fixed h-full md:bg-cover m-auto slideIn" >
         <div className="bg-[#6947ef] w-[40%] h-[20vh] rounded-full blur-3xl m-auto float-right mt-[-8rem] -z-10 lg:w-[22%] transition-all duration-500">
           <p></p>
           </div>

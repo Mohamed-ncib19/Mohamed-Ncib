@@ -56,3 +56,22 @@ body{
     background-color: #1b1b1b;
     
 }
+
+
+/*slideBar animations*/
+@keyframes slideIn {
+    0%{
+      transform: translateX(100%);
+      opacity: 0.4;
+      
+    }
+    100%{
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+
+  .slideIn{
+    animation:slideIn 0.6s ease-out;
+    
+  }
