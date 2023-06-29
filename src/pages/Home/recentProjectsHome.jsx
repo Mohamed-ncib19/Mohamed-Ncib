@@ -50,7 +50,7 @@ const RecentProjectsHome = () => {
           <div className='flex flex-row justify-around items-center w-[100%] m-auto'>
             <p className='text-[20px] m-auto'>Weather APP</p>
             <div className='bg-[#6947ef] rounded-md text-white m-auto lg:w-[50%] w-[60%] p-1 text-center hover:bg-[#7355eb] hover:text-[#0F0F0F]'>
-              <a href="/" className='transition-all duration-500 cursor-pointer'>Live Preview</a>
+              <a href="https://weather-wbb8.onrender.com" className='transition-all duration-500 cursor-pointer'>Live Preview</a>
             </div>
             <a href="https://github.com/Mohamed-ncib19/Weather-APP" className='bg-[#484848] p-2 rounded-full hover:bg-[#6947ef] hover:text-[#ffffff] transition-all duration-300'><GithubIcon /></a>
           </div>

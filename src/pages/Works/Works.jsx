@@ -98,7 +98,7 @@ const Works = () => {
             <p className="text-[20px]">Weather APP</p>
             <div className="bg-[#6947ef] rounded-md text-white w-[30%] text-center hover:bg-[#7355eb] hover:text-[#0F0F0F]">
               <a
-                href="/"
+                href="https://weather-wbb8.onrender.com"
                 className="transition-all duration-500 cursor-pointer"
               >
                 Live Preview
