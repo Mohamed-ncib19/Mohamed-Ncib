@@ -1,18 +1,18 @@
-import Icons from "../Home/Icons";
+import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import Navbar from "../navbar/navbar";
-import MohamedPicture from "../../assets/ME.png"
 import Footer from "../footer/footer";
+import ScrollToTop from "../../functions/scrollToTp";
+import Icons from "../icons/Icons";
 import FrontEndIcon from "../icons/FrontEndIcon";
 import DownloadIcon from "../icons/download.jsx"
-import { useNavigate } from "react-router-dom";
-import Resume from '../../assets/PDF/Resume 2022-2023.pdf'
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import MohamedPicture from "../../assets/ME.png"
 import PlaceHolderImage from "../../assets/ME_LowRes.png"
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import Resume from '../../assets/PDF/Resume 2022-2023.pdf'
 
 const About = () => {
-  const Navigate = useNavigate();
-
+  ScrollToTop();
   return (
     <div className="bg-[#0F0F0F] h-full text-white">
       <div className="bg-[#6947ef] w-[40%] h-[20vh] rounded-full blur-3xl m-auto  lg:w-[22%] transition-all duration-500">
@@ -39,14 +39,12 @@ const About = () => {
             </div>
         </div>
         
-      <button className="flex flex-row justify-center items-center text-center m-auto lg:w-[30%] w-[90%] p-2 rounded-xl bg-[#6947ef] text-white hover:bg-[#6947ef] font-medium hover:text-[#0F0F0F] transition-all duration-500"
-        onClick={()=>{
-          Navigate('/Works')
-        }}
+      <Link to="/Works" className="flex flex-row justify-center items-center text-center m-auto lg:w-[30%] w-[90%] p-2 rounded-xl bg-[#6947ef] text-white hover:bg-[#6947ef] font-medium hover:text-[#0F0F0F] transition-all duration-500"
+       
       >
         <p className="text-center p-1 font-semibold">Check Projects</p>
         <FrontEndIcon className="text-[30px]" />
-      </button>
+      </Link>
       </div>
        <Footer />
     </div>

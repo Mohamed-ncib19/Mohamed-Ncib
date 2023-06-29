@@ -1,4 +1,4 @@
-import Icons from "../Home/Icons";
+import Icons from "../icons/Icons";
 
 
 const Footer = () => {

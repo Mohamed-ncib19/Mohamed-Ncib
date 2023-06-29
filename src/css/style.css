@@ -62,7 +62,7 @@ body{
 @keyframes slideIn {
     0%{
       transform: translateX(100%);
-      opacity: 0.4;
+      opacity: 0;
       
     }
     100%{
@@ -72,6 +72,6 @@ body{
   }
 
   .slideIn{
-    animation:slideIn 0.6s ease-out;
+    animation:slideIn 0.5s ease-out;
     
   }

@@ -6,14 +6,16 @@ import forthProject from "../../assets/pass-generator.png"
 import fifthProject from "../../assets/RPS.png"
 import sixthProject from "../../assets/quote-generator.png"
 import GithubIcon from "../icons/githubIcon.jsx";
-import { useNavigate } from "react-router-dom";
 import FrontEndIcon from "../icons/FrontEndIcon.jsx"
 import Footer from "../footer/footer";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { Link } from "react-router-dom";
+import ScrollToTop from "../../functions/scrollToTp";
 
 const Works = () => {
-  const Navigate = useNavigate();
+  ScrollToTop();
+ 
   return (
     <div className="bg-[#0F0F0F]  text-white h-full">
       <div className="bg-[#6947ef] w-[40%] h-[20vh] rounded-full blur-3xl m-auto  lg:w-[22%] transition-all duration-500">
@@ -213,16 +215,13 @@ const Works = () => {
         </div>
       </div>
 
-      <button
+      <Link
         className="flex flex-row justify-center items-center text-center m-auto lg:w-[30%] w-[50%] p-2 rounded-xl font-semibold bg-[#6947ef] text-white hover:bg-[#7658eb] hover:text-[#0F0F0F] transition-all duration-500"
-        onClick={() => {
-          Navigate("/Contact");
-        }}
+        to="/Contact"
       >
         <p className="text-center p-2">Hire Me</p>
         <FrontEndIcon className="text-[30px]" />
-        {/* change the buttons Icon */}
-      </button>
+      </Link>
       <Footer />
       </div>
     </div>

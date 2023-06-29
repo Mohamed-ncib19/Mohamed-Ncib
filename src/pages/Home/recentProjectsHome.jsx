@@ -6,9 +6,8 @@ import thirdProject from "../../assets/weather-app.png"
 import forthProject from "../../assets/pass-generator.png"
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { Link } from 'react-router-dom';
 
-
-import { Link } from 'react-router-dom'
 const RecentProjectsHome = () => {
   return (
     <div className='bg-[#0F0F0F]'>
@@ -75,10 +74,10 @@ const RecentProjectsHome = () => {
 
 
       </div>
-    <button className='flex flex-row justify-center items-center text-center m-auto md:w-[20%] w-[50%] p-2 rounded-xl bg-[#6947ef] text-white hover:bg-[#7658eb] hover:text-[#0F0F0F] transition-all duration-500'>
-        <Link to="/Works"><p>View More</p></Link>
+    <Link to="/Works" className='flex flex-row justify-center items-center text-center m-auto md:w-[20%] w-[50%] p-2 rounded-xl bg-[#6947ef] text-white hover:bg-[#7658eb] hover:text-[#0F0F0F] transition-all duration-500'>
+        <p>View More</p>
       <ViewMoreIcon className="text-[30px]" />
-    </button>
+    </Link>
     </div>
     </div>
   );

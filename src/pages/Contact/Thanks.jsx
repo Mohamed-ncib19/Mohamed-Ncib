@@ -2,7 +2,9 @@ import Footer from "../footer/footer";
 import BackIcon from "../icons/backIcon";
 import Navbar from "../navbar/navbar";
 import { useNavigate } from "react-router-dom";
+import ScrollToTop from "../../functions/scrollToTp.js"
 const Thanks = () => {
+  ScrollToTop();
     const Navigate = useNavigate();
     return ( 
         <div className="bg-[#0F0F0F]  text-white transition-all duration-500 m-auto">

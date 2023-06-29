@@ -1,6 +1,6 @@
-import GithubIcon from "../icons/githubIcon";
-import GmailIcon from "../icons/gmailIcon";
-import Linkedin from "../icons/linkedin";
+import GithubIcon from "./githubIcon";
+import GmailIcon from "./gmailIcon";
+import Linkedin from "./linkedin";
 const Icons = () => {
     return ( 
         <div className="flex flex-row justify-center items-center gap-4">

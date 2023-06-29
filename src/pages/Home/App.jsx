@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-
+import { MemoryRouter, Routes, Route, useLocation } from "react-router-dom";
 import "../../css/index.css";
 import HomePage from "./HomePage";
 import SlideBar from "../navbar/slideBar";
@@ -13,8 +12,8 @@ function AppContent() {
   const location = useLocation();
 
   return (
-    <Routes location={location}>
-      <Route path="/" element={<HomePage />} />
+    <Routes location={location} >
+      <Route path="/" exact element={<HomePage />} />
       <Route path="/Slide-Bar" element={<SlideBar />} />
       <Route path="/About-Me" element={<About />} />
       <Route path="/Works" element={<Works />} />
@@ -27,9 +26,9 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <MemoryRouter>
       <AppContent />
-    </BrowserRouter>
+    </MemoryRouter>
   );
 }
 

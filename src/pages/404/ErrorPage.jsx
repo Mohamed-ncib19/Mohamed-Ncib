@@ -1,10 +1,10 @@
-import { useNavigate  } from "react-router-dom";
-
+import { Link  } from "react-router-dom";
 import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
 import ViewMoreIcon from "../icons/viewMore";
+import ScrollToTop from "../../functions/scrollToTp";
 const ErrorPage = () => {
-    const Navigate = useNavigate();
+    ScrollToTop();
     return ( 
         <div className="bg-[#0F0F0F] text-white">
         <div className="bg-[#6947ef] w-[40%] h-[20vh] rounded-full blur-3xl m-auto  lg:w-[22%] transition-all duration-500">
@@ -17,14 +17,12 @@ const ErrorPage = () => {
                 <h1 className=" md:text-[5rem] text-[2rem]">Page Not Found</h1>
                 <p>The Page You Are Looking for is doesnt exist</p>
             </div>
-            <button
+            <Link
             className="flex flex-row justify-center items-center text-center m-auto -mt-16 lg:w-[20%] w-[50%] p-2 rounded-xl bg-[#6947ef] text-white hover:bg-[#6947ef] font-medium hover:text-[#0F0F0F] transition-all duration-500"
-            onClick={()=>{
-                Navigate('/');
-            }}
+            to="/"
             >Explore Home
             <ViewMoreIcon />    
-            </button>
+            </Link>
             
         </div>
         <Footer />

@@ -27,7 +27,7 @@ const SlideBar = () => {
             ><CloseIcon className="text-[30px] text-white" /></button>
           </nav>
           <div className=" h-screen flex flex-col justify-center items-center gap-6 text-white text-[40px] -mt-[90px]">
-            <Link to="/About-Me" smooth>
+            <Link to="/About-Me">
             <h1 className="cursor-pointer hover:text-[#6947ef] transition-all duration-500">About</h1>
             </Link>
             <Link to="/Works">
