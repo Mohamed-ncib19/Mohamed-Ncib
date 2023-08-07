@@ -5,6 +5,8 @@ import thirdProject from "../../assets/weather-app.png"
 import forthProject from "../../assets/pass-generator.png"
 import fifthProject from "../../assets/RPS.png"
 import sixthProject from "../../assets/quote-generator.png"
+import findus from "../../assets/FindUs-Game.png"
+import dashboard from "../../assets/AdminDhasboard.png"
 import GithubIcon from "../icons/githubIcon.jsx";
 import FrontEndIcon from "../icons/FrontEndIcon.jsx"
 import Footer from "../footer/footer";
@@ -58,6 +60,70 @@ const Works = () => {
             />
           </div>
         </div>
+
+        <div
+          id="project"
+          className="flex flex-col items-center gap-2 w-[90%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
+        >
+          <div className="flex flex-row justify-around items-center w-[100%]">
+            <p className="text-[20px]">Find Us</p>
+            <div className="bg-[#6947ef] rounded-md text-white w-[30%] text-center hover:bg-[#7355eb] hover:text-[#0F0F0F]">
+              <a
+                href="https://find-us.onrender.com/"
+                className="transition-all duration-500"
+              >
+                Live Preview
+              </a>
+            </div>
+            <a
+              href="https://github.com/Mohamed-ncib19/Find-Us"
+              className="bg-[#484848] p-2 rounded-full hover:bg-[#6947ef] hover:text-[#ffffff] transition-all duration-300"
+            >
+              <GithubIcon />
+            </a>
+          </div>
+          <div className="w-[100%] m-auto">
+            <LazyLoadImage
+              src={findus}
+              effect='blur'
+              alt="Project-Photo"
+              className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto"
+            />
+          </div>
+        </div>
+
+        <div
+          id="project"
+          className="flex flex-col items-center gap-2 w-[90%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500"
+        >
+          <div className="flex flex-row justify-around items-center w-[100%]">
+            <p className="text-[20px]">Admin Dashboard</p>
+            <div className="bg-[#6947ef] rounded-md text-white w-[30%] text-center hover:bg-[#7355eb] hover:text-[#0F0F0F]">
+              <a
+                href="https://simple-admin-dashboard.onrender.com/"
+                className="transition-all duration-500"
+              >
+                Live Preview
+              </a>
+            </div>
+            <a
+              href="https://github.com/Mohamed-ncib19/Admin-Dashboard"
+              className="bg-[#484848] p-2 rounded-full hover:bg-[#6947ef] hover:text-[#ffffff] transition-all duration-300"
+            >
+              <GithubIcon />
+            </a>
+          </div>
+          <div className="w-[100%] m-auto">
+            <LazyLoadImage
+              src={dashboard}
+              effect='blur'
+              alt="Project-Photo"
+              className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto"
+            />
+          </div>
+        </div>
+
+
 
         <div
           id="project"
