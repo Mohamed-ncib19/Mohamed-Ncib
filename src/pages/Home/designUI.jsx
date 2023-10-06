@@ -1,6 +1,6 @@
 import 'react-slideshow-image/dist/styles.css'
 import { Slide } from 'react-slideshow-image';
-import telemex from "../../assets/telemex.png"
+import telemex from "../../assets/Telemex.png"
 import portfolioUI from "../../assets/portfolioUI.png"
 import AminDashboardUI from "../../assets/AminDashboardUI.png"
 import FigmaIcon from "../icons/figmaIcon"
