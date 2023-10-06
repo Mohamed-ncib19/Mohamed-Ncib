@@ -20,6 +20,7 @@
     "react-icons": "^4.9.0",
     "react-lazy-load-image-component": "^1.6.0",
     "react-router-hash-link": "^2.4.3",
+    "react-slideshow-image": "^4.2.1",
     "react-transition-group": "^4.4.5",
     "uuid": "^9.0.0"
   },

@@ -9,6 +9,9 @@ import findus from "../../assets/FindUs-Game.png"
 import dashboard from "../../assets/AdminDhasboard.png"
 import GithubIcon from "../icons/githubIcon.jsx";
 import FrontEndIcon from "../icons/FrontEndIcon.jsx"
+import icloud from "../../assets/icloud-login-clone.png"
+import nuisible from "../../assets/nuisible-expert.png"
+import Wordpress from "../icons/wordpress.jsx"
 import Footer from "../footer/footer";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -90,6 +93,32 @@ const Works = () => {
               className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto"
             />
           </div>
+        </div>
+
+        <div id='project' className="flex flex-col items-center gap-4 w-[90%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500">
+          <div className='flex flex-row justify-around items-center w-[100%]'>
+            <p className='text-[20px]'>Icloud-login-clone</p>
+            <div className='bg-[#6947ef] rounded-md text-white m-auto lg:w-[50%] w-[60%] p-1 text-center hover:bg-[#7355eb] hover:text-[#0F0F0F]'>
+              <a href="https://mohamed-ncib19.github.io/Icloud-login-clone/" className='transition-all duration-500 cursor-pointer'>Live Preview</a>
+            </div>
+            <a href="https://github.com/Mohamed-ncib19/Icloud-login-clone" className='bg-[#484848] p-2 rounded-full hover:bg-[#6947ef] hover:text-[#ffffff] transition-all duration-300'><GithubIcon /></a>
+          </div>
+          <div className='w-[100%] m-auto'>
+          <LazyLoadImage src={icloud} effect='blur' alt="Project-Photo" className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto" />
+        </div>
+        </div>
+
+        <div id='project' className="flex flex-col items-center justify-center gap-4 w-[90%] md:w-[60%] md:h-auto h-auto rounded-xl m-auto border border-[#6947ef] p-2 transition-all duration-500">
+          <div className='flex flex-row justify-around items-center w-[100%]'>
+            <p className='text-[20px]'>nuisible expert</p>
+            <div className='bg-[#6947ef] rounded-md text-white m-auto lg:w-[50%] w-[60%] p-1 text-center hover:bg-[#7355eb] hover:text-[#0F0F0F]'>
+              <a href="https://nuisiblexpert.fr/fr/" className='transition-all duration-500 cursor-pointer'>Live Preview</a>
+            </div>
+            <a  className='bg-[#484848] p-2 rounded-full hover:bg-[#beb0a4] hover:text-[#ffffff] transition-all duration-300'><Wordpress /></a>
+          </div>
+          <div className='w-[100%] m-auto'>
+          <LazyLoadImage src={nuisible} effect='blur' alt="Project-Photo" className="md:w-[90%] w-[100%] border border-[#6947ef] rounded-xl m-auto" />
+        </div>
         </div>
 
         <div
