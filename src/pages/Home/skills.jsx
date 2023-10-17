@@ -42,6 +42,10 @@ const Skills = () => {
             </div>
             <div className="flex flex-row items-center ">
               <ListeArrow />
+              <p>Bootstrap</p>
+            </div>
+            <div className="flex flex-row items-center ">
+              <ListeArrow />
               <p>HTML</p>
             </div>
             <div className="flex flex-row items-center ">
@@ -64,6 +68,18 @@ const Skills = () => {
           <BackEndIcon  className='text-[60px] transition-all duration-500 backIcon  text-[#6947ef]'/>
           <h2 className="text-[30px] backText transition-all duration-500 ">Back</h2>
           <div className="flex flex-col justify-center items-start space-y-5 backText transition-all duration-500 ">
+          <div className="flex flex-row items-center ">
+              <ListeArrow />
+              <p>Node.JS</p>
+            </div>
+            <div className="flex flex-row items-center ">
+              <ListeArrow />
+              <p>Express.js</p>
+            </div>
+            <div className="flex flex-row items-center ">
+              <ListeArrow />
+              <p>MongoDB</p>
+            </div>
             <div className="flex flex-row items-center ">
               <ListeArrow />
               <p>Sql</p>
