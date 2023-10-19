@@ -16,7 +16,6 @@ const Hero = () => {
     "Dec",
   ];
   const D = new Date();
-
   return (
     <div className="h-screen bg-[#0F0F0F]">
       <div className="text-white m-auto text-center w-[90%] h-full md:w-[80%] flex flex-col gap-[8%] justify-center items-center border-b transition-all duration-500 bg-[#0F0F0F]">
