@@ -13,6 +13,10 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@material-tailwind/react": "^2.1.4",
+    "@mui/material": "^5.14.14",
     "firebase": "^9.22.2",
     "framer-motion": "^10.12.17",
     "react": "^18.2.0",
@@ -22,6 +26,8 @@
     "react-router-hash-link": "^2.4.3",
     "react-slideshow-image": "^4.2.1",
     "react-transition-group": "^4.4.5",
+    "tw-elements": "^1.0.0",
+    "tw-elements-react": "^1.0.0-alpha1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
