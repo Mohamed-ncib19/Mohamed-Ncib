@@ -21,7 +21,7 @@ const SlideBar = ({ isOpen, setIsOpen }) => {
         visible && (
             <div 
                 id="slideBarContainer"
-                className={`fixed inset-0 bg-[#0F0F0F] h-full bg-cover transition-all duration-500 ${isOpen ? 'slide-in' : 'slide-out'}`}
+                className={`fixed inset-0 bg-[#0F0F0F] h-full bg-cover transition-all duration-500 z-50 ${isOpen ? 'slide-in' : 'slide-out'}`}
                 onAnimationEnd={handleAnimationEnd}
             >
                 <div className="bg-[#6947ef] w-[40%] h-[20vh] rounded-full blur-3xl m-auto float-right mt-[-8rem] -z-10 lg:w-[22%] transition-all duration-500"></div>
