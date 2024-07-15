@@ -23,7 +23,7 @@ const About = () => {
         <div className="flex lg:flex-row justify-around items-center flex-col-reverse">
             <div className="lg:w-[40%] w-[70%] gap-8 flex flex-col justify-center items-center text-center">
                 <h2 className="text-[40px] tracking-wider">Mohamed Ncib</h2>
-                <p className="tracking-wider w-full text-[16px]">Hello world, I`m Mohamed Ncib, a freshly graduated Computer Science student with experience in web development and web design. I`m passionate about creating functional and user-friendly websites.</p>
+                <p className="tracking-wider w-full text-[16px]">Hello world, I`m Mohamed Ncib, a graduated Computer Science student with experience in web development and web design. I`m passionate about creating functional and user-friendly websites.</p>
                   <a
                     href={CVEnglish}
                     className="flex flex-row justify-center items-center text-center m-auto lg:w-[30%] gap-2 w-[90%] p-2 rounded-md font-bold bg-[#6947ef] text-white hover:bg-[#6947ef] hover:text-[#0F0F0F] transition-all duration-500"

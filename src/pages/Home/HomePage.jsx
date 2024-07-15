@@ -11,7 +11,7 @@ const HomePage = () => {
   
     return ( 
         <div className="bg-[#0F0F0F]  bg-fixed h-screen md:bg-cover m-auto" >
-        <div className="bg-[#6947ef] w-[40%] h-[20vh] rounded-full blur-3xl m-auto mt-[-1rem] -z-10 lg:w-[22%] transition-all duration-500">
+        <div className="bg-[#6947ef] w-[40%] h-[20vh] rounded-full blur-3xl m-auto mt-[-1rem] -z-50 lg:w-[22%] transition-all duration-500">
         
         </div>
           <Navbar />

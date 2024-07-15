@@ -60,18 +60,27 @@ body{
 
 /*slideBar animations*/
 @keyframes slideIn {
-    0%{
-      transform: translateX(100%);
-      opacity: 0;
-      
+    from {
+        transform: translateX(100%);
     }
-    100%{
-      transform: translateX(0%);
-      opacity: 1;
+    to {
+        transform: translateX(0);
     }
-  }
+}
 
-  .slideIn{
-    animation:slideIn 0.5s ease-out;
-    
-  }
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.slide-in {
+    animation: slideIn 500ms forwards;
+}
+
+.slide-out {
+    animation: slideOut 500ms forwards;
+}
