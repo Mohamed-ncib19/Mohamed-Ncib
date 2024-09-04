@@ -21,7 +21,7 @@ const About = () => {
       <Navbar />
       <div id="content" className=" h-full flex flex-col flex-wrap gap-4 p-4 ">
         <div className="flex lg:flex-row justify-around items-center flex-col-reverse">
-            <div className="lg:w-[40%] w-[70%] gap-8 flex flex-col justify-center items-center text-center">
+            <div className="lg:w-[40%] w-[40%] gap-8 flex flex-col justify-center items-center text-center">
                 <h2 className="text-[40px] tracking-wider">Mohamed Ncib</h2>
                 <p className="tracking-wider w-full text-[16px]">Hello world, I`m Mohamed Ncib, a graduated Computer Science student with experience in web development and web design. I`m passionate about creating functional and user-friendly websites.</p>
                   <a
@@ -36,8 +36,8 @@ const About = () => {
                     </a>
                 <Icons />
             </div>
-            <div className="lg:w-[20%]  float-right rounded-md shadow-[#7c7c7c6c]">
-                <LazyLoadImage src={MohamedPicture} effect="blur" alt="Moahamed Ncib" />
+            <div className="lg:w-[20%] w-[50%] lg:m-0 m-auto  float-right rounded-md shadow-[#7c7c7c6c]">
+                <LazyLoadImage src={MohamedPicture}  effect="blur" alt="Moahamed Ncib" />
             </div>
         </div>
         

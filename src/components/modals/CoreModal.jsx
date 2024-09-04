@@ -37,6 +37,7 @@ const CoreModal = ({ buttonContent }) => {
             <img
               src={GraduationImage}
               alt="Graduated"
+              loading="lazy"
               className="w-40 h-auto"
             />
             <h1 className="text-white text-2xl font-extrabold tracking-wider mt-4 mb-2">
@@ -44,7 +45,9 @@ const CoreModal = ({ buttonContent }) => {
             </h1>
           </div>
         </DialogBody>
-        <DialogFooter className="flex justify-center md:justify-end gap-5">
+        <DialogFooter className="flex md:flex-row flex-col-reverse justify-center md:justify-between gap-5">
+      <span className=" text-gray-300 hover:bg-gray-200/5 px-2 py-1 rounded-md" >graduation year - 2024</span>
+        <div className="flex gap-5" >
           
           <Button
               onClick={handleCongratsClick}
@@ -63,6 +66,7 @@ const CoreModal = ({ buttonContent }) => {
             </Button>
             
           </ReactWhatsapp>
+          </div>
         </DialogFooter>
       </Dialog>
     </>
