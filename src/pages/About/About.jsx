@@ -25,7 +25,7 @@ const About = () => {
 
       <div id="content" className="relative z-10 h-full flex flex-col gap-20 p-8 max-w-7xl mx-auto">
         {/* Hero Section */}
-        <div className="flex lg:flex-row justify-between items-center flex-col-reverse gap-20 pt-16 lg:pt-24">
+        <div className="flex lg:flex-row justify-between items-center flex-col gap-20 pt-16 lg:pt-24">
           {/* Left content */}
           <div className="lg:w-[55%] w-full gap-10 flex flex-col justify-center lg:items-start items-center lg:text-left text-center">
             {/* Greeting with icon */}
@@ -111,7 +111,7 @@ const About = () => {
           </div>
 
           {/* Right image - Simple gray border frame */}
-          <div className="lg:w-[40%] w-[85%] sm:w-[65%] md:w-[55%] relative group">
+          <div className="lg:w-[40%] w-[50%] hidden md:flex relative group">
             {/* Simple gray border frame */}
             <div className="border-b-2 border-gray-900 rounded-2xl overflow-hidden shadow-2xl group-hover:border-gray-700  transition-all duration-500 group-hover:scale-105 group-hover:shadow-purple-500/20">
               <LazyLoadImage
