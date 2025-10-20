@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install clsx tailwind-merge lucide-react class-variance-authority)",
+      "Bash(npm run build)",
+      "Bash(npm run dev)",
+      "Bash(findstr /N \"Information Technologies\")",
+      "Bash(findstr /N \"Professional Experience\")",
+      "Bash(git log -1 --format=\"%an %ae\")",
+      "Bash(git remote set-url origin https://github.com/Kirazul/hama-portfolio.git)",
+      "Bash(git add src/pages/navbar/navbar.jsx src/pages/Home/skills.jsx src/pages/Home/Experience.jsx src/pages/Contact/Contact.jsx)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nUpdate theme styling: Fix gradient colors and revert navbar transparency\n\n- Updated gradient colors across Information Technologies, Experience sections to use consistent purple-pink-purple theme\n- Fixed Contact section button to use matching gradient with via color\n- Reverted navbar to always stay transparent (removed scroll background effect)\n- All sections now use consistent from-purple-400 via-pink-500 to-purple-600 gradient\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push origin master)",
+      "Read(//c/Users/KIRA/Desktop/**)",
+      "Bash(git reset --hard HEAD~1)",
+      "Bash(git push origin master --force)",
+      "Bash(cat navbar.jsx)",
+      "Bash(grep -A 3 \"className=\\`fixed\")",
+      "Bash(git init)",
+      "Bash(git add .)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

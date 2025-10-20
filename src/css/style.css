@@ -1,0 +1,172 @@
+/*Font Raleway*/
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Raleway:ital,wght@1,200&display=swap');
+body{
+    font-family: 'Raleway', sans-serif;
+}
+
+/*Design section*/
+.hoverAnimationDesign:hover{
+    cursor: pointer;
+}
+.hoverAnimationDesign:hover .designIcon{
+    color: #ffffff;
+
+}
+
+.hoverAnimationDesign:hover .designText{
+    color: #6947ef;
+}
+
+
+/*Front section*/
+.hoverAnimationFront:hover{
+    cursor: pointer;
+}
+.hoverAnimationFront:hover .frontIcon{
+    color: #f3f3f3;
+}
+.hoverAnimationFront:hover .frontText{
+    color: #6947ef;
+}
+
+
+/*BackEnd section*/
+.hoverAnimationBack:hover{
+    cursor: pointer;
+}
+.hoverAnimationBack:hover .backText{
+    color: #6947ef;
+}
+.hoverAnimationBack:hover .backIcon{
+    color: #ffffff;
+}
+
+.contactButton:hover .hoverring{
+    color: #6947ef;
+
+}
+.contactButton:hover{
+    cursor: pointer;
+
+}
+.contactButton:hover .hoverringIcon{
+    color: #ffffff;
+
+}
+.contactButton:hover .circleInside{
+    background-color: #1b1b1b;
+
+}
+
+
+/*slideBar animations*/
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.slide-in {
+    animation: slideIn 500ms forwards;
+}
+
+.slide-out {
+    animation: slideOut 500ms forwards;
+}
+
+/* Gradient animation */
+@keyframes gradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Pulse animation with delay */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.05);
+    }
+}
+
+.animate-pulse {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.delay-1000 {
+    animation-delay: 1s;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0F0F0F;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6947ef, #ec4899);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7c3aed, #f472b6);
+}
+
+/* Selection color */
+::selection {
+    background-color: rgba(105, 71, 239, 0.3);
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background-color: rgba(105, 71, 239, 0.3);
+    color: #ffffff;
+}
