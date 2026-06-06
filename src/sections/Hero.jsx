@@ -68,7 +68,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          <div className="mt-auto grid grid-cols-2 gap-8 text-center sm:grid-cols-4 sm:gap-12 lg:text-left">
+          <div className="mt-auto hidden grid-cols-2 gap-8 text-center sm:grid sm:grid-cols-4 sm:gap-12 lg:text-left">
             {profile.pillars.map((p) => (
               <motion.div key={p.number} variants={item}>
                 <span className="font-mono text-xs font-semibold text-secondary">#{p.number}</span>
