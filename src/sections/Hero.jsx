@@ -53,7 +53,7 @@ export default function Hero() {
               variants={item}
               className="mt-8 max-w-2xl text-center text-base leading-7 text-white/60 sm:mt-6 sm:text-lg sm:leading-8 lg:text-left"
             >
-              Turning raw ideas into scalable digital products. I blend strategic thinking with user-centric design to craft experiences that drive measurable impact.
+              I define product vision, uncover market opportunities, and lead cross-functional execution — turning ambiguity into products that win.
             </motion.p>
 
             <motion.div variants={item} className="mt-10 sm:mt-8">

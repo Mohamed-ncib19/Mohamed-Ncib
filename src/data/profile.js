@@ -12,9 +12,9 @@ export const profile = {
   email: 'mohamed.ncib@polytechnicien.tn',
   phoneLabel: '+216 55 518 492',
   whatsappNumber: '21655518492',
-  headline: 'I turn any idea into a product. Complexity is where the work starts.',
+  headline: 'I turn market complexity into product clarity. Strategy is where the work starts.',
   bio:
-    'Strategy, design, and front-end fluency — I bridge all three to turn any idea into a shipped product. Currently studying Data Science & AI to sharpen product decisions.',
+    'Market intelligence, product vision, and cross-functional execution — I connect the dots to turn opportunities into shipped products. Currently studying Data Science & AI to sharpen strategic decisions.',
   cv: {
     href: cvPdf,
     fileName: 'Mohamed_Ncib_CV_PLACEHOLDER.pdf',
@@ -27,14 +27,14 @@ export const profile = {
     backendNote: 'PLACEHOLDER contact backend. Set VITE_FORMSPREE_ENDPOINT to a real Formspree endpoint.',
   },
   pillars: [
-    { number: '01', title: 'User Psychology', description: 'Behavioral mapping, user research, and empathy flows' },
-    { number: '02', title: 'Market Strategy', description: 'Analyzing product-market fit and competitor landscapes' },
-    { number: '03', title: 'Product Management', description: 'Cross-functional alignment, scoping, and lifecycle strategy' },
-    { number: '04', title: 'Product Design', description: 'Turning ideas into tangible, high-fidelity UI/UX' },
+    { number: '01', title: 'Market Intelligence', description: 'Competitive analysis, trend forecasting, and opportunity identification' },
+    { number: '02', title: 'Product Vision', description: 'Defining roadmaps, positioning, and long-term strategic direction' },
+    { number: '03', title: 'User Insight', description: 'Behavioral research, needs discovery, and empathy-driven validation' },
+    { number: '04', title: 'Strategic Execution', description: 'Cross-functional alignment, prioritization, and measurable impact' },
   ],
   areas: [
-    'Product Design',
-    'Front-End Engineering',
+    'Product Strategy',
+    'Market Research',
     'UX Strategy',
     'Data & Analytics',
   ],
