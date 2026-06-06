@@ -14,7 +14,7 @@ export const profile = {
   whatsappNumber: '21655518492',
   headline: 'I turn market complexity into product clarity. Strategy is where the work starts.',
   bio:
-    'Market intelligence, product vision, and cross-functional execution — I connect the dots to turn opportunities into shipped products. Currently studying Data Science & AI to sharpen strategic decisions.',
+    'Market intelligence, product vision, and cross-functional execution, I connect the dots to turn opportunities into shipped products. Currently studying Data Science & AI to sharpen strategic decisions.',
   cv: {
     href: cvPdf,
     fileName: 'Mohamed_Ncib_CV_PLACEHOLDER.pdf',
