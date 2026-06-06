@@ -1,113 +1,110 @@
-import { ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Chip from '../components/Chip.jsx';
 import Reveal from '../components/Reveal.jsx';
-import { projects } from '../data/projects.js';
-import { cn } from '../lib/utils.js';
+
+const entries = [
+  {
+    period: '2022 – Present',
+    title: 'Freelance Web Developer',
+    bullets: [
+      'Built custom web applications for clients across various industries.',
+      'Managed full project lifecycles from concept to deployment.',
+      'Delivered solutions aligned with business goals and user needs.',
+    ],
+    side: 'right',
+  },
+  {
+    period: '2025 – 2026',
+    title: 'Abajim',
+    bullets: [
+      'Developed and optimized production features for the core platform.',
+      'Participated in performance improvements and code quality initiatives.',
+      'Collaborated closely with design and product teams on feature delivery.',
+    ],
+    side: 'left',
+  },
+  {
+    period: 'Ongoing',
+    title: 'Personal Products',
+    bullets: [
+      'Created and deployed real-world services from the ground up.',
+      'Experimented with SaaS architectures and user-engagement platforms.',
+      'Focused on scalability, clean architecture, and product-driven UX.',
+    ],
+    side: 'right',
+  },
+];
 
 export default function Work() {
-  const [expanded, setExpanded] = useState(null);
-
-  const toggleProject = (slug) => {
-    setExpanded((prev) => (prev === slug ? null : slug));
-  };
-
   return (
     <section id="work" className="section-shell scroll-mt-24">
       <Reveal>
-        <p className="eyebrow mb-4">Work</p>
-        <h2 className="section-title max-w-3xl">Selected projects</h2>
+        <p className="eyebrow mb-4">Journey</p>
+        <h2 className="section-title max-w-3xl">My journey</h2>
       </Reveal>
 
-      <div className="mt-12 space-y-1">
-        {projects.map((project, index) => {
-          const isOpen = expanded === project.slug;
+      <div className="relative mt-16">
+        <div className="pointer-events-none absolute left-[19px] top-0 bottom-0 w-px bg-gradient-to-b from-[#9D4EDD]/40 via-white/[0.08] to-transparent sm:left-1/2 sm:-translate-x-px" />
 
-          return (
-            <Reveal key={project.slug} delay={index * 0.06}>
-              <div
-                className={cn(
-                  'rounded-2xl border border-transparent transition-all duration-500 cursor-pointer',
-                  isOpen
-                    ? 'border-white/[0.1] bg-white/[0.04]'
-                    : 'hover:border-white/[0.06] hover:bg-white/[0.015]',
-                )}
-              >
-                <button
-                  onClick={() => toggleProject(project.slug)}
-                  className="flex w-full items-center gap-4 px-5 py-5 text-left sm:px-7"
-                >
-                  <span className="font-mono text-xs font-semibold tracking-wider text-white/20 sm:text-sm">
-                    {String(index + 1).padStart(2, '0')}
+        <div className="space-y-16 sm:space-y-20">
+          {entries.map((entry, i) => (
+            <Reveal key={entry.title} delay={i * 0.1} direction={i % 2 === 0 ? 'left' : 'right'}>
+              <div className="relative grid sm:grid-cols-2 sm:gap-8 lg:gap-12">
+                {/* Dot */}
+                <div className="absolute left-0 top-1.5 sm:left-1/2 sm:-translate-x-1/2">
+                  <div className="h-[10px] w-[10px] rounded-full border-2 border-[#9D4EDD] bg-[#07070a] shadow-[0_0_12px_-2px_rgb(157_78_221_/_0.5)]" />
+                </div>
+
+                {/* Date — left on mobile, alternate on desktop */}
+                <div className={`pl-10 sm:pl-0 ${i % 2 === 0 ? 'sm:pr-8 sm:text-right' : 'sm:col-start-2 sm:pl-8'}`}>
+                  <span className="inline-block rounded-full border border-white/[0.06] bg-white/[0.04] px-3.5 py-1 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.15em] text-white/50 sm:text-[0.55rem]">
+                    {entry.period}
                   </span>
+                </div>
 
-                  <div className="flex-1 min-w-0">
-                    <p className="font-display text-base font-medium tracking-[-0.03em] text-white transition-colors sm:text-lg">
-                      {project.title}
-                    </p>
-                    <div className="mt-0.5 flex items-center gap-2 text-xs text-white/30">
-                      <span>{project.year}</span>
-                      <span aria-hidden="true">&middot;</span>
-                      <span>{project.type}</span>
-                    </div>
-                  </div>
+                {/* Content — left on mobile, alternate on desktop */}
+                <div className={`mt-3 pl-10 sm:mt-0 sm:pl-0 ${i % 2 === 0 ? 'sm:row-start-1 sm:col-start-2 sm:pl-8' : 'sm:pr-8 sm:text-right'}`}>
+                  <h3 className="font-display text-xl font-medium tracking-[-0.03em] text-white sm:text-2xl">
+                    {entry.title}
+                  </h3>
 
-                  <div className="flex items-center gap-3">
-                    <div className="hidden gap-1.5 sm:flex">
-                      {project.tags.slice(0, 2).map((tag) => (
-                        <Chip key={tag} variant="muted" className="normal-case tracking-normal text-[0.6rem]">
-                          {tag}
-                        </Chip>
-                      ))}
-                    </div>
-                    <ChevronDown
-                      className={cn(
-                        'h-4 w-4 text-white/30 transition-transform duration-500 shrink-0',
-                        isOpen && 'rotate-180',
-                      )}
-                    />
-                  </div>
-                </button>
-
-                <div
-                  className={cn(
-                    'overflow-hidden transition-all duration-500 ease-[0.22,1,0.36,1]',
-                    isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0',
-                  )}
-                >
-                  <div className="border-t border-white/[0.06] px-5 pb-6 pt-5 sm:px-7 sm:pb-7">
-                    <div className="grid gap-6 sm:grid-cols-[1fr_auto]">
-                      <div className="space-y-4">
-                        <p className="text-sm leading-7 text-white/60">{project.summary}</p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {project.tags.map((tag) => (
-                            <Chip key={tag} variant="muted" className="normal-case tracking-normal">
-                              {tag}
-                            </Chip>
-                          ))}
-                        </div>
-                        {project.role && (
-                          <p className="text-xs text-white/25">
-                            <span className="font-semibold text-white/40">Role:</span> {project.role}
-                          </p>
-                        )}
-                      </div>
-
-                      <Link
-                        to={`/work/${project.slug}`}
-                        className="inline-flex h-10 items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-5 text-xs font-semibold text-white/60 transition hover:border-white/20 hover:bg-white/[0.07] hover:text-white sm:self-start"
-                      >
-                        View project &rarr;
-                      </Link>
-                    </div>
-                  </div>
+                  <ul className={`mt-4 space-y-2.5 ${i % 2 === 0 ? '' : 'sm:flex sm:flex-col sm:items-end'}`}>
+                    {entry.bullets.map((bullet, bi) => (
+                      <li key={bi} className={`flex gap-3 text-sm leading-6 text-white/55 sm:text-base sm:leading-7 ${i % 2 === 0 ? '' : 'sm:flex-row-reverse'}`}>
+                        <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#9D4EDD]/60" />
+                        <span className={i % 2 === 0 ? '' : 'sm:text-left'}>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </Reveal>
-          );
-        })}
+          ))}
+        </div>
       </div>
+
+      {/* CTA */}
+      <Reveal delay={0.2}>
+        <div className="relative mt-20 overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 sm:p-8 lg:p-10">
+          <div className="pointer-events-none absolute -top-20 -right-20 h-40 w-40 rounded-full bg-[#9D4EDD]/10 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-[#2F0F40]/20 blur-3xl" />
+
+          <div className="relative">
+            <p className="max-w-2xl text-sm leading-7 text-white/60 sm:text-base sm:leading-8">
+              Interested in the technical details, challenges, architecture decisions, or client results?
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                to="/#contact"
+                className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-[rgb(22_10_27)] px-6 py-2.5 text-sm font-semibold text-white/85 shadow-[0_0_30px_-8px_#7d5493] shadow-[inset_0_1px_0_rgb(255_255_255_/_0.12)] backdrop-blur-xl transition-all duration-300 hover:brightness-125 hover:-translate-y-0.5 hover:shadow-[0_0_50px_-4px_#7d5493]"
+              >
+                Let&apos;s talk
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Reveal>
     </section>
   );
 }

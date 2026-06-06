@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'motion/react';
 
 const steps = [
   { label: 'Discover', description: 'Uncover user needs, pain points, and opportunities to define the problem space.', color: '#8b5cf6' },
@@ -22,8 +22,25 @@ export default function ProcessStack() {
     offset: ['start start', 'end end'],
   });
 
-  const SCROLL_DIST = (steps.length - 1) * (CARD_W + GAP);
-  const x = useTransform(scrollYProgress, [0, ENTRY, 1], ['100vw', '0px', `-${SCROLL_DIST}px`]);
+  const [snappedIndex, setSnappedIndex] = useState(0);
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on('change', (v) => {
+      const adjusted = Math.max(0, v - ENTRY) / (1 - ENTRY);
+      const idx = Math.round(adjusted * (steps.length - 1));
+      setSnappedIndex(Math.max(0, Math.min(steps.length - 1, idx)));
+    });
+    return unsubscribe;
+  }, [scrollYProgress]);
+
+  const xTarget = -(snappedIndex * (CARD_W + GAP));
+  const xRaw = useMotionValue(0);
+  const x = useSpring(xRaw, { stiffness: 120, damping: 25 });
+
+  useEffect(() => {
+    xRaw.set(xTarget);
+  }, [xTarget]);
+
   const opacity = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0]);
   const pointerEvents = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], ['none', 'auto', 'auto', 'none']);
   const titleOpacity = useTransform(scrollYProgress, [0, ENTRY * 0.6, ENTRY * 1.1], [1, 1, 0]);
@@ -51,34 +68,28 @@ export default function ProcessStack() {
           <div className="overflow-hidden flex-1">
             <motion.div style={{ x }} className="flex gap-8">
               {steps.map((step, i) => (
-                <Card key={step.label} index={i} step={step} progress={scrollYProgress} />
+                <Card key={step.label} index={i} step={step} active={i === snappedIndex} />
               ))}
             </motion.div>
           </div>
         </div>
 
-        <ProgressDots total={steps.length} progress={scrollYProgress} />
+        <ProgressDots total={steps.length} activeIndex={snappedIndex} />
       </motion.div>
     </section>
   );
 }
 
-const CARD_COUNT = steps.length;
-
-function Card({ index, step, progress }) {
-  const span = 1 - ENTRY;
-  const center = ENTRY + (index + 0.5) / CARD_COUNT * span;
-  const half = 0.5 / CARD_COUNT * span;
-
-  const focus = useTransform(progress, [center - half, center, center + half], [0, 1, 0]);
-  const cardScale = useTransform(focus, [0, 1], [0.95, 1]);
-  const cardOpacity = useTransform(focus, [0, 1], [0.4, 1]);
-  const xShift = useTransform(focus, [0, 1], [40, 0]);
-
+function Card({ index, step, active }) {
   return (
     <motion.div
-      style={{ scale: cardScale, opacity: cardOpacity, x: xShift }}
-      className="flex-shrink-0 w-[520px] h-[420px] rounded-2xl p-0 flex flex-col relative overflow-hidden"
+      animate={{
+        scale: active ? 1 : 0.88,
+        opacity: active ? 1 : 0.25,
+        x: active ? 0 : 30,
+      }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="flex-shrink-0 w-[85vw] sm:w-[400px] lg:w-[520px] h-[300px] sm:h-[360px] lg:h-[420px] rounded-2xl p-0 flex flex-col relative overflow-hidden"
     >
       <div className="absolute inset-0 bg-white/[0.06] rounded-2xl border border-white/[0.08]" />
 
@@ -88,14 +99,16 @@ function Card({ index, step, progress }) {
       />
 
       <motion.div
-        style={{ backgroundColor: step.color, opacity: useTransform(focus, [0, 1], [0, 0.12]) }}
+        animate={{ opacity: active ? 0.12 : 0 }}
+        transition={{ duration: 0.5 }}
+        style={{ backgroundColor: step.color }}
         className="absolute inset-0 rounded-2xl"
       />
 
       <div className="relative flex-1 flex flex-col justify-center px-10 sm:px-14 lg:px-16 py-12">
         <div className="flex items-center gap-3 mb-6">
           <motion.span
-            style={{ opacity: useTransform(focus, [0, 1], [0.3, 0.7]) }}
+            animate={{ opacity: active ? 0.7 : 0.3 }}
             className="font-display text-xs font-medium tracking-[0.15em] uppercase text-white/60"
           >
             Step {String(index + 1).padStart(2, '0')}
@@ -121,31 +134,29 @@ function Card({ index, step, progress }) {
       </div>
 
       <motion.div
-        style={{ opacity: useTransform(focus, [0, 1], [0, 0.2]) }}
+        animate={{ opacity: active ? 0.2 : 0 }}
+        transition={{ duration: 0.5 }}
         className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full blur-[80px] pointer-events-none"
+        style={{ backgroundColor: step.color }}
       />
     </motion.div>
   );
 }
 
-function ProgressDots({ total, progress }) {
-  const span = 1 - ENTRY;
+function ProgressDots({ total, activeIndex }) {
   return (
     <div className="flex justify-center gap-3 pb-14">
-      {Array.from({ length: total }, (_, i) => {
-        const center = ENTRY + (i + 0.5) / total * span;
-        const half = 0.5 / total * span;
-        const active = useTransform(progress, [center - half, center, center + half], [0.2, 1, 0.2]);
-        const w = useTransform(active, [0.2, 1], [8, 32]);
-
-        return (
-          <motion.div
-            key={i}
-            style={{ opacity: active, width: w }}
-            className="h-1 rounded-full bg-white/80"
-          />
-        );
-      })}
+      {Array.from({ length: total }, (_, i) => (
+        <motion.div
+          key={i}
+          animate={{
+            opacity: i === activeIndex ? 1 : 0.2,
+            width: i === activeIndex ? 32 : 8,
+          }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="h-1 rounded-full bg-white/80"
+        />
+      ))}
     </div>
   );
 }

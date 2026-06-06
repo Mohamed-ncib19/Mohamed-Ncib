@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { ReactLenis } from 'lenis/react';
 import Background from './components/Background.jsx';
+import CursorFollower from './components/CursorFollower.jsx';
 import LoadingScreen from './components/LoadingScreen.jsx';
 import Header from './sections/Header.jsx';
 import Footer from './sections/Footer.jsx';
@@ -74,6 +75,7 @@ export default function App() {
         <ReactLenis root>
           <div className="relative min-h-screen overflow-x-hidden text-foreground">
             <Background />
+            <CursorFollower />
             <a
               href="#main-content"
               className="sr-only z-[100] rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background focus:not-sr-only focus:fixed focus:left-4 focus:top-4"

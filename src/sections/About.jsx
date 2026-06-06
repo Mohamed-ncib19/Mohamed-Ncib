@@ -41,12 +41,12 @@ export default function About() {
                 <Chip key={area} variant="vivid" dot>{area}</Chip>
               ))}
             </Reveal>
-            <Reveal delay={0.12} className="mt-4">
+            <Reveal delay={0.12} className="mt-5">
               <button
                 onClick={() => setCvOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-xs font-semibold text-white/70 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.12)] backdrop-blur-xl transition hover:border-secondary/50 hover:bg-white/[0.09] hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-[rgb(22_10_27)] px-5 py-2.5 text-sm font-semibold text-white/85 shadow-[0_0_30px_-8px_#7d5493] shadow-[inset_0_1px_0_rgb(255_255_255_/_0.12)] backdrop-blur-xl transition-all duration-300 hover:brightness-125 hover:-translate-y-0.5 hover:shadow-[0_0_50px_-4px_#7d5493]"
               >
-                <FileText className="h-3.5 w-3.5" />
+                <FileText className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                 View CV
               </button>
             </Reveal>

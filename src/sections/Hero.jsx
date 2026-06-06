@@ -2,6 +2,7 @@ import { AnimatePresence } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
+import LiquidButton from '../components/LiquidButton.jsx';
 import ProjectCreationFlow from '../components/ProjectCreationFlow.jsx';
 import { profile } from '../data/profile.js';
 
@@ -57,13 +58,13 @@ export default function Hero() {
             </motion.p>
 
             <motion.div variants={item} className="mt-8">
-              <button
+              <LiquidButton
                 onClick={() => setFlowOpen(true)}
-                className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-[rgb(22_10_27)] px-7 py-3 text-sm font-semibold text-white/90 shadow-[0_0_40px_-6px_#7d5493] shadow-[inset_0_1px_0_rgb(255_255_255_/_0.12)] backdrop-blur-xl transition-all duration-300 hover:brightness-125 hover:-translate-y-0.5 hover:shadow-[0_0_60px_-4px_#7d5493]"
+                className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-[rgb(22_10_27)] px-7 py-3 text-sm font-semibold text-white/90 shadow-[0_0_40px_-6px_#7d5493] shadow-[inset_0_1px_0_rgb(255_255_255_/_0.12)] backdrop-blur-xl transition-shadow duration-300 hover:shadow-[0_0_60px_-4px_#7d5493]"
               >
                 Let&apos;s build an experience
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </button>
+              </LiquidButton>
             </motion.div>
           </div>
 
