@@ -13,17 +13,7 @@ const entries = [
     ],
     side: 'right',
   },
-  {
-    period: '2025 – 2026',
-    title: 'Abajim',
-    bullets: [
-      'Developed and optimized production features for the core platform.',
-      'Participated in performance improvements and code quality initiatives.',
-      'Collaborated closely with design and product teams on feature delivery.',
-    ],
-    side: 'left',
-  },
-  {
+    {
     period: 'Ongoing',
     title: 'Personal Products',
     bullets: [
@@ -31,7 +21,7 @@ const entries = [
       'Experimented with SaaS architectures and user-engagement platforms.',
       'Focused on scalability, clean architecture, and product-driven UX.',
     ],
-    side: 'right',
+    side: 'left',
   },
 ];
 
