@@ -30,7 +30,7 @@ export default function Hero() {
       />
       <div className="absolute inset-0 bg-[#07070a]/30 lg:bg-transparent" />
 
-      <div className="relative z-10 flex w-full grow flex-col px-6 pb-6 pt-28 sm:px-10 sm:pb-10 sm:pt-32">
+      <div className="relative z-10 flex w-full grow flex-col px-8 pb-20 pt-24 sm:px-10 sm:pb-10 sm:pt-32">
         <motion.div
           variants={container}
           initial={shouldReduceMotion ? false : 'hidden'}
@@ -44,20 +44,20 @@ export default function Hero() {
 
             <motion.h1
               variants={item}
-              className="mt-2 max-w-5xl text-center font-display text-[clamp(3rem,9vw,7rem)] font-medium leading-[0.9] tracking-[-0.07em] text-white lg:text-left"
+              className="mt-3 max-w-5xl text-center font-display text-[clamp(3rem,9vw,7rem)] font-medium leading-[0.9] tracking-[-0.07em] text-white sm:mt-2 lg:text-left"
             >
               Product<br />Designer
             </motion.h1>
 
             <motion.p
               variants={item}
-              className="mt-6 max-w-2xl text-center text-base leading-7 text-white/60 sm:text-lg sm:leading-8 lg:text-left"
+              className="mt-8 max-w-2xl text-center text-base leading-7 text-white/60 sm:mt-6 sm:text-lg sm:leading-8 lg:text-left"
             >
               Turning raw ideas into scalable digital products. I merge user psychology with market
               strategy and agile management to build experiences that convert.
             </motion.p>
 
-            <motion.div variants={item} className="mt-8">
+            <motion.div variants={item} className="mt-10 sm:mt-8">
               <LiquidButton
                 onClick={() => setFlowOpen(true)}
                 className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-[rgb(22_10_27)] px-7 py-3 text-sm font-semibold text-white/90 shadow-[0_0_40px_-6px_#7d5493] shadow-[inset_0_1px_0_rgb(255_255_255_/_0.12)] backdrop-blur-xl transition-shadow duration-300 hover:shadow-[0_0_60px_-4px_#7d5493]"
