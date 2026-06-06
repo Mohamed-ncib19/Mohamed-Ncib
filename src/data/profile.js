@@ -7,7 +7,7 @@ export const profile = {
   firstName: 'Mohamed',
   lastName: 'Ncib',
   initials: 'MN',
-  role: 'Product Designer',
+  role: 'Product Strategist',
   location: 'Tunisia',
   email: 'mohamed.ncib@polytechnicien.tn',
   phoneLabel: '+216 55 518 492',

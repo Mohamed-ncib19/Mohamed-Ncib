@@ -33,7 +33,7 @@ export default function Header() {
         <nav aria-label="Primary navigation" className="flex items-center justify-center lg:justify-between">
           <Link to="/" className="group leading-none shrink-0" aria-label="Mohamed Ncib home">
             <span className="block text-sm font-semibold uppercase tracking-[0.34em] text-foreground">Mohamed Ncib</span>
-            <span className="mt-0.5 block text-[0.55rem] font-normal uppercase tracking-[0.28em] text-muted-foreground">Product designer</span>
+            <span className="mt-0.5 block text-[0.55rem] font-normal uppercase tracking-[0.28em] text-muted-foreground">Product Strategist</span>
           </Link>
 
           <div className="hidden items-center gap-6 lg:flex">
