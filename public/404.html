@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting - Mohamed Ncib</title>
+    <script>
+      (function () {
+        var base = '/Mohamed-Ncib/';
+        var path = window.location.pathname.replace('/Mohamed-Ncib', '') || '/';
+        sessionStorage.setItem('mn-spa-redirect', path + window.location.search + window.location.hash);
+        window.location.replace(base);
+      })();
+    </script>
+  </head>
+  <body>
+    Redirecting...
+  </body>
+</html>

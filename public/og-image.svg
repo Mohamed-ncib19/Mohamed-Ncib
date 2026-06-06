@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Mohamed Ncib - Product Designer</title>
+  <desc id="desc">Editorial warm-neutral social preview card with terracotta accent.</desc>
+  <rect width="1200" height="630" fill="#efe6d6" />
+  <circle cx="980" cy="120" r="180" fill="#d05f3f" opacity="0.18" />
+  <circle cx="170" cy="530" r="220" fill="#1e6964" opacity="0.14" />
+  <path d="M94 96H1106V534H94z" fill="none" stroke="#263238" stroke-width="2" opacity="0.22" />
+  <text x="96" y="210" fill="#263238" font-family="Georgia, serif" font-size="86" font-weight="700">Mohamed Ncib</text>
+  <text x="100" y="286" fill="#d05f3f" font-family="Arial, sans-serif" font-size="31" letter-spacing="5">PRODUCT DESIGNER</text>
+  <text x="100" y="382" fill="#263238" font-family="Arial, sans-serif" font-size="34">Developer fluency. Data sense. Human-centered systems.</text>
+  <line x1="100" y1="455" x2="510" y2="455" stroke="#d05f3f" stroke-width="6" stroke-linecap="round" />
+</svg>

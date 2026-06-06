@@ -2,12 +2,88 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./src/assets/favIcon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mohamed Ncib</title>
+    <meta name="theme-color" content="#0A0A0F" />
+    <meta
+      name="description"
+      content="Mohamed Ncib is a product designer with a web development and data science background, designing clear digital products from evidence, systems, and craft."
+    />
+    <link rel="canonical" href="https://mohamed-ncib19.github.io/Mohamed-Ncib/" />
+    <link rel="icon" type="image/png" href="/src/assets/favIcon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mohamed Ncib - Product Designer" />
+    <meta
+      property="og:description"
+      content="A refined product-design portfolio shaped by developer fluency and data-science thinking."
+    />
+    <meta property="og:url" content="https://mohamed-ncib19.github.io/Mohamed-Ncib/" />
+    <meta property="og:image" content="https://mohamed-ncib19.github.io/Mohamed-Ncib/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mohamed Ncib - Product Designer" />
+    <meta
+      name="twitter:description"
+      content="Product design, research, and systems thinking with a subtle data-science sensibility."
+    />
+    <meta name="twitter:image" content="https://mohamed-ncib19.github.io/Mohamed-Ncib/og-image.svg" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mohamed Ncib",
+        "jobTitle": "Product Designer",
+        "url": "https://mohamed-ncib19.github.io/Mohamed-Ncib/",
+        "email": "mohamed.ncib@polytechnicien.tn",
+        "sameAs": [
+          "https://www.linkedin.com/in/mohamed-ncib-1b17b5224/",
+          "https://github.com/Mohamed-ncib19"
+        ],
+        "knowsAbout": ["Product Design", "UX Research", "Web Development", "Data Science"]
+      }
+    </script>
+    <script>
+      (function () {
+        try {
+          var storedTheme = localStorage.getItem('mn-theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+
+          var redirect = sessionStorage.getItem('mn-spa-redirect');
+          if (redirect) {
+            sessionStorage.removeItem('mn-spa-redirect');
+            var base = '%BASE_URL%';
+            window.history.replaceState(null, '', base + redirect.replace(/^\//, ''));
+          }
+        } catch (error) {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+    <!--
+      GA4 placeholder. Replace G-XXXXXXXXXX before production analytics are enabled.
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      </script>
+    -->
+    <title>Mohamed Ncib - Product Designer</title>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/pages/main.jsx"></script>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
