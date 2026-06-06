@@ -14,6 +14,7 @@ const steps = [
 const CARD_W = 520;
 const GAP = 32;
 const ENTRY = 0.12;
+const LOCK_MS = 700;
 
 export default function ProcessStack() {
   const container = useRef(null);
@@ -22,18 +23,29 @@ export default function ProcessStack() {
     offset: ['start start', 'end end'],
   });
 
-  const rawProgress = useMotionValue(0);
-  const smoothProgress = useSpring(rawProgress, { stiffness: 80, damping: 25, mass: 0.8 });
+  const targetIdx = useRef(0);
+  const isAnimating = useRef(false);
 
+  const smoothTarget = useMotionValue(0);
+  const smoothProgress = useSpring(smoothTarget, { stiffness: 80, damping: 25, mass: 0.8 });
   const [snappedIndex, setSnappedIndex] = useState(0);
 
   useEffect(() => {
     return scrollYProgress.on('change', (v) => {
-      const adjusted = Math.max(0, v - ENTRY) / (1 - ENTRY);
-      rawProgress.set(adjusted);
+      if (isAnimating.current) return;
 
-      const idx = Math.round(adjusted * (steps.length - 1));
-      setSnappedIndex(Math.max(0, Math.min(steps.length - 1, idx)));
+      const adjusted = Math.max(0, v - ENTRY) / (1 - ENTRY);
+      const rawIdx = adjusted * (steps.length - 1);
+      const rounded = Math.round(rawIdx);
+      const clamped = Math.max(0, Math.min(steps.length - 1, rounded));
+
+      if (clamped !== targetIdx.current) {
+        isAnimating.current = true;
+        targetIdx.current = clamped;
+        smoothTarget.set(clamped / (steps.length - 1));
+        setSnappedIndex(clamped);
+        setTimeout(() => { isAnimating.current = false; }, LOCK_MS);
+      }
     });
   }, [scrollYProgress]);
 
