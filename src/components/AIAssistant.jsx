@@ -11,6 +11,20 @@ About Mohamed:
 
 Direct business inquiries to email or the "Let's build an experience" button. No long explanations.`;
 
+const API_URL = '/nvidia-api/v1/chat/completions';
+const PRIMARY_MODEL = 'nvidia/nemotron-3-ultra-550b-a55b';
+const FALLBACK_MODELS = [
+  'nvidia/llama-3.1-nemotron-70b-instruct',
+  'meta/llama-3.3-70b-instruct',
+];
+
+const BASE_BODY = {
+  temperature: 0.7,
+  top_p: 0.9,
+  max_tokens: 256,
+  stream: true,
+};
+
 export default function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -66,6 +80,74 @@ export default function AIAssistant() {
     return results;
   }, []);
 
+  const streamResponse = async (model, signal, apiMessages) => {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${import.meta.env.VITE_NVIDIA_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model,
+        messages: apiMessages,
+        ...BASE_BODY,
+        ...(model === PRIMARY_MODEL
+          ? {
+              extra_body: {
+                chat_template_kwargs: { enable_thinking: true },
+                reasoning_budget: 16384,
+              },
+            }
+          : {}),
+      }),
+      signal,
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`API error ${response.status}: ${errorText}`);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let assistantContent = '';
+    let buffer = '';
+
+    let reading = true;
+
+    while (reading) {
+      const { done, value } = await reader.read();
+      if (done) {
+        reading = false;
+        break;
+      }
+
+      buffer += decoder.decode(value, { stream: true });
+      const chunks = parseSSE(buffer);
+
+      if (chunks.length > 0) {
+        buffer = buffer.slice(buffer.indexOf(chunks[chunks.length - 1] || '') + (chunks[chunks.length - 1] || '').length);
+        assistantContent += chunks.join('');
+        setMessages((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1] = { role: 'assistant', content: assistantContent };
+          return updated;
+        });
+      }
+    }
+
+    if (!assistantContent.trim()) {
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = {
+          role: 'assistant',
+          content: 'I received an empty response. Please try again or reach out via email at mohamed.ncib@polytechnicien.tn.',
+        };
+        return updated;
+      });
+    }
+  };
+
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
 
@@ -77,78 +159,32 @@ export default function AIAssistant() {
     const controller = new AbortController();
     controllerRef.current = controller;
 
+    const apiMessages = [
+      { role: 'system', content: SYSTEM_PROMPT },
+      ...messages.map((m) => ({ role: m.role, content: m.content })),
+      { role: 'user', content: userMessage },
+    ];
+
+    setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
+
+    const models = [PRIMARY_MODEL, ...FALLBACK_MODELS];
+    let lastError = null;
+
     try {
-      const apiMessages = [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...messages.map((m) => ({ role: m.role, content: m.content })),
-        { role: 'user', content: userMessage },
-      ];
-
-      const response = await fetch('/nvidia-api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${import.meta.env.VITE_NVIDIA_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: 'nvidia/nemotron-3-ultra-550b-a55b',
-          messages: apiMessages,
-          temperature: 0.7,
-          top_p: 0.9,
-          max_tokens: 256,
-          stream: true,
-          extra_body: {
-            chat_template_kwargs: { enable_thinking: true },
-            reasoning_budget: 16384,
-          },
-        }),
-        signal: controller.signal,
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`API error ${response.status}: ${errorText}`);
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let assistantContent = '';
-      let buffer = '';
-
-      setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
-
-      let reading = true;
-
-      while (reading) {
-        const { done, value } = await reader.read();
-        if (done) {
-          reading = false;
+      for (const model of models) {
+        try {
+          await streamResponse(model, controller.signal, apiMessages);
+          lastError = null;
           break;
-        }
-
-        buffer += decoder.decode(value, { stream: true });
-        const chunks = parseSSE(buffer);
-
-        if (chunks.length > 0) {
-          buffer = buffer.slice(buffer.indexOf(chunks[chunks.length - 1] || '') + (chunks[chunks.length - 1] || '').length);
-          assistantContent += chunks.join('');
-          setMessages((prev) => {
-            const updated = [...prev];
-            updated[updated.length - 1] = { role: 'assistant', content: assistantContent };
-            return updated;
-          });
+        } catch (error) {
+          if (error.name === 'AbortError') throw error;
+          lastError = error;
+          console.error(`Model ${model} failed:`, error);
         }
       }
 
-      if (!assistantContent.trim()) {
-        setMessages((prev) => {
-          const updated = [...prev];
-          updated[updated.length - 1] = {
-            role: 'assistant',
-            content: 'I received an empty response. Please try again or reach out via email at mohamed.ncib@polytechnicien.tn.',
-          };
-          return updated;
-        });
+      if (lastError) {
+        throw lastError;
       }
     } catch (error) {
       if (error.name !== 'AbortError') {
@@ -229,6 +265,18 @@ export default function AIAssistant() {
                   </div>
                 </div>
               ))}
+              {isLoading && (
+                <div className="flex gap-3">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#9D4EDD]/20 text-[#B57EFF]">
+                    <Bot className="h-3.5 w-3.5" />
+                  </div>
+                  <div className="flex items-center gap-1 rounded-2xl bg-white/[0.06] px-4 py-3">
+                    <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-white/50" style={{ animationDelay: '0s' }} />
+                    <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-white/50" style={{ animationDelay: '0.15s' }} />
+                    <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-white/50" style={{ animationDelay: '0.3s' }} />
+                  </div>
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </div>
           </div>
