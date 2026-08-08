@@ -8,6 +8,7 @@ import LoadingScreen from './components/LoadingScreen.jsx';
 import Header from './sections/Header.jsx';
 import Footer from './sections/Footer.jsx';
 import ScrollProgress from './components/ScrollProgress.jsx';
+import AIAssistant from './components/AIAssistant.jsx';
 
 const Home = lazy(() => import('./pages/Home.jsx'));
 const CaseStudy = lazy(() => import('./pages/CaseStudy.jsx'));
@@ -99,6 +100,7 @@ export default function App() {
               </Suspense>
             </main>
             <Footer />
+            <AIAssistant />
           </div>
         </ReactLenis>
       </div>
