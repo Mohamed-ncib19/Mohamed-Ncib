@@ -1,22 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { MessageSquare, X, Send, Bot, User, Loader2 } from 'lucide-react';
+import { MessageSquare, X, Send, Bot, User } from 'lucide-react';
 
-const SYSTEM_PROMPT = `You are Mohamed Ncib's AI portfolio assistant. Mohamed is a Product Strategist based in Tunisia with a background in web development and data science.
+const SYSTEM_PROMPT = `You are Mohamed Ncib's AI portfolio assistant. Be concise and direct. Keep answers under 80 words.
 
-Key information about Mohamed:
-- Role: Product Strategist
-- Location: Tunisia
+About Mohamed:
+- Product Strategist in Tunisia
 - Email: mohamed.ncib@polytechnicien.tn
-- Expertise: Market intelligence, product vision, UX strategy, data & analytics, strategic execution
-- Current focus: Data Science & AI
-- Services: Product strategy, market research, UX research, cross-functional execution
+- Expertise: product strategy, market research, UX, data & analytics
+- Contact: LinkedIn, Instagram, Facebook, GitHub, WhatsApp
 
-When visitors ask about working with Mohamed, direct them to:
-1. Use the "Let's build an experience" button to start a project
-2. Reach out via email at mohamed.ncib@polytechnicien.tn
-3. Connect on LinkedIn, Instagram, Facebook, GitHub, or WhatsApp
-
-Be helpful, professional, and concise. Keep responses under 150 words unless detailed explanation is needed.`;
+Direct business inquiries to email or the "Let's build an experience" button. No long explanations.`;
 
 export default function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,8 +57,7 @@ export default function AIAssistant() {
       if (data === '[DONE]') continue;
       try {
         const parsed = JSON.parse(data);
-        const delta = parsed.choices?.[0]?.delta || {};
-        const content = delta.content || delta.reasoning_content;
+        const content = parsed.choices?.[0]?.delta?.content;
         if (content) results.push(content);
       } catch {
         // skip invalid JSON
@@ -101,9 +93,9 @@ export default function AIAssistant() {
         body: JSON.stringify({
           model: 'nvidia/nemotron-3-super-120b-a12b',
           messages: apiMessages,
-          temperature: 1,
-          top_p: 0.95,
-          max_tokens: 1024,
+          temperature: 0.7,
+          top_p: 0.9,
+          max_tokens: 256,
           stream: true,
         }),
         signal: controller.signal,
@@ -233,16 +225,6 @@ export default function AIAssistant() {
                   </div>
                 </div>
               ))}
-              {isLoading && (
-                <div className="flex gap-3">
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#9D4EDD]/20 text-[#B57EFF]">
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                  </div>
-                  <div className="rounded-2xl bg-white/[0.06] px-4 py-2.5">
-                    <p className="text-xs text-white/40">Thinking...</p>
-                  </div>
-                </div>
-              )}
               <div ref={messagesEndRef} />
             </div>
           </div>
