@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '../lib/utils.js';
 
@@ -11,12 +11,24 @@ const navItems = [
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const rafRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 18);
+    const onScroll = () => {
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 18);
+        rafRef.current = null;
+      });
+    };
+
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   return (

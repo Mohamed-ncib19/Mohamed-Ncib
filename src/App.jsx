@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { ReactLenis } from 'lenis/react';
+import { ReactLenis, useLenis } from 'lenis/react';
 import Background from './components/Background.jsx';
 import CursorFollower from './components/CursorFollower.jsx';
 import LoadingScreen from './components/LoadingScreen.jsx';
@@ -15,18 +15,22 @@ const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 function ScrollManager() {
   const { pathname, hash } = useLocation();
+  const lenis = useLenis();
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
       if (hash) {
-        document.getElementById(hash.replace('#', ''))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const el = document.getElementById(hash.replace('#', ''));
+        if (el) {
+          lenis?.scrollTo(el, { offset: 0 });
+        }
         return;
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lenis?.scrollTo(0, { offset: 0 });
     }, 80);
 
     return () => window.clearTimeout(timeout);
-  }, [pathname, hash]);
+  }, [pathname, hash, lenis]);
 
   return null;
 }

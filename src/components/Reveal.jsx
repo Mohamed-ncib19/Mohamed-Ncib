@@ -1,11 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-
-const directions = {
-  up: { y: 32 },
-  down: { y: -32 },
-  left: { x: 32 },
-  right: { x: -32 },
-};
+import { cn } from '../lib/utils';
 
 export default function Reveal({ children, className, as = 'div', delay = 0, direction = 'up' }) {
   const ref = useRef(null);
@@ -33,22 +27,16 @@ export default function Reveal({ children, className, as = 'div', delay = 0, dir
     return () => observer.disconnect();
   }, []);
 
-  const dir = directions[direction] || directions.up;
-  const offsetX = dir.x || 0;
-  const offsetY = dir.y || 0;
-
   return (
     <Component
       ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible
-          ? 'translateX(0) translateY(0) scale(1)'
-          : `translateX(${offsetX}px) translateY(${offsetY}px) scale(0.97)`,
-        filter: visible ? 'blur(0px)' : 'blur(4px)',
-        transition: `opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s, filter 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s`,
-      }}
+      className={cn(
+        'reveal',
+        visible ? 'reveal-visible' : 'reveal-hidden',
+        `reveal-${direction}`,
+        className
+      )}
+      style={{ transitionDelay: `${delay}s` }}
     >
       {children}
     </Component>

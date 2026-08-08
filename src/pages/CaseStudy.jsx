@@ -58,9 +58,9 @@ export default function CaseStudy() {
         {project.image ? (
           <img src={project.image} alt={project.imageAlt} loading="eager" className="aspect-[16/9] w-full rounded-[1.65rem] object-cover" />
         ) : (
-          <div className="relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden rounded-[1.65rem] bg-muted/40">
-            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#9D4EDD]/25 blur-3xl" aria-hidden="true" />
-            <div className="absolute -bottom-16 left-12 h-52 w-52 rounded-full bg-[#6B2FB8]/20 blur-3xl" aria-hidden="true" />
+            <div className="relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden rounded-[1.65rem] bg-muted/40">
+              <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full" style={{ background: 'radial-gradient(circle, rgb(157 78 221 / 0.30) 0%, transparent 70%)' }} aria-hidden="true" />
+              <div className="absolute -bottom-16 left-12 h-52 w-52 rounded-full" style={{ background: 'radial-gradient(circle, rgb(107 47 184 / 0.25) 0%, transparent 70%)' }} aria-hidden="true" />
             <div className="relative text-center">
               <p className="text-[clamp(3rem,8vw,7rem)] font-semibold leading-none tracking-[-0.08em] text-secondary/80">
                 {project.visual?.value}

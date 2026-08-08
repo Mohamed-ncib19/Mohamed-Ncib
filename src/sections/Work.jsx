@@ -75,9 +75,9 @@ export default function Work() {
 
       {/* CTA */}
       <Reveal delay={0.2}>
-        <div className="relative mt-20 overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 sm:p-8 lg:p-10">
-          <div className="pointer-events-none absolute -top-20 -right-20 h-40 w-40 rounded-full bg-[#9D4EDD]/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-[#2F0F40]/20 blur-3xl" />
+          <div className="relative mt-20 overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 sm:p-8 lg:p-10">
+            <div className="pointer-events-none absolute -top-20 -right-20 h-40 w-40 rounded-full" style={{ background: 'radial-gradient(circle, rgb(157 78 221 / 0.18) 0%, transparent 70%)' }} />
+            <div className="pointer-events-none absolute -bottom-20 -left-20 h-40 w-40 rounded-full" style={{ background: 'radial-gradient(circle, rgb(47 15 64 / 0.25) 0%, transparent 70%)' }} />
 
           <div className="relative">
             <p className="max-w-2xl text-sm leading-7 text-white/60 sm:text-base sm:leading-8">

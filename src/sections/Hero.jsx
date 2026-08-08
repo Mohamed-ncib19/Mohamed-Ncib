@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import { useState } from 'react';
 import LiquidButton from '../components/LiquidButton.jsx';
 import ProjectCreationFlow from '../components/ProjectCreationFlow.jsx';
+import TextType from '../components/TextType.jsx';
 import { profile } from '../data/profile.js';
 
 export default function Hero() {
@@ -25,7 +26,7 @@ export default function Hero() {
   return (
     <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#07070a]">
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-lg lg:blur-none"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat lg:blur-none"
         style={{ backgroundImage: `url(${import.meta.env.BASE_URL}Hero.png)` }}
       />
       <div className="absolute inset-0 bg-[#07070a]/30 lg:bg-transparent" />
@@ -42,12 +43,18 @@ export default function Hero() {
               Hey, I&apos;m a
             </motion.p>
 
-            <motion.h1
-              variants={item}
-              className="mt-3 max-w-5xl text-center font-display text-[clamp(3rem,9vw,7rem)] font-medium leading-[0.9] tracking-[-0.07em] text-white sm:mt-2 lg:text-left"
-            >
-              Product<br />Strategist
-            </motion.h1>
+            <motion.div variants={item} className="mt-3 max-w-5xl sm:mt-2 lg:text-left">
+              <TextType
+                text={['Mohamed Ncib', 'Product Designer']}
+                typingSpeed={75}
+                pauseDuration={2000}
+                deletingSpeed={40}
+                showCursor={true}
+                cursorCharacter="|"
+                as="h1"
+                className="text-center font-display text-[clamp(3rem,9vw,7rem)] font-medium leading-[0.9] tracking-[-0.07em] text-white lg:text-left"
+              />
+            </motion.div>
 
             <motion.p
               variants={item}

@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring } from 'motion/react';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export default function CursorFollower() {
   const mouseX = useMotionValue(-200);
@@ -7,14 +7,15 @@ export default function CursorFollower() {
   const springX = useSpring(mouseX, { stiffness: 300, damping: 30 });
   const springY = useSpring(mouseY, { stiffness: 300, damping: 30 });
 
+  const move = useCallback((e) => {
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  }, [mouseX, mouseY]);
+
   useEffect(() => {
-    const move = (e) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
     window.addEventListener('mousemove', move);
     return () => window.removeEventListener('mousemove', move);
-  }, []);
+  }, [move]);
 
   return (
     <motion.div

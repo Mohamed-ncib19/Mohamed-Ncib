@@ -18,17 +18,18 @@ export default function LoadingScreen({ onFinish }) {
         }}
       />
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="relative flex flex-col items-center"
-      >
         <motion.div
-          animate={{ opacity: [0.4, 1, 0.4] }}
-          transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
-          className="absolute inset-0 rounded-full bg-[#9D4EDD]/20 blur-3xl"
-        />
+          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="relative flex flex-col items-center"
+        >
+          <motion.div
+            animate={{ opacity: [0.4, 1, 0.4] }}
+            transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
+            className="absolute inset-0 rounded-full"
+            style={{ background: 'radial-gradient(circle, rgb(157 78 221 / 0.35) 0%, transparent 70%)' }}
+          />
 
         <span className="relative font-display text-5xl font-medium tracking-[-0.06em] text-white sm:text-7xl">
           MN

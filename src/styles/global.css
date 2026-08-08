@@ -41,7 +41,6 @@
 
   html {
     background: #07070a;
-    scroll-behavior: smooth;
   }
 
   body {
@@ -54,14 +53,17 @@
       radial-gradient(ellipse 30% 20% at 80% 15%, rgb(59 130 246 / 0.05), transparent 40%),
       radial-gradient(ellipse 50% 40% at 30% 60%, rgb(157 78 221 / 0.06), transparent 50%),
       radial-gradient(ellipse 80% 100% at 50% 0%, transparent 40%, rgb(7 7 10 / 0.55) 100%);
-    background-attachment: fixed;
     min-height: 100vh;
   }
 
   body::before {
-    @apply pointer-events-none fixed inset-0 z-[-1] opacity-[0.04] mix-blend-screen;
+    @apply pointer-events-none fixed inset-0 z-[-1] opacity-[0.03];
     content: '';
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+    background-image: radial-gradient(circle, rgb(255 255 255 / 0.15) 1px, transparent 1px);
+    background-size: 3px 3px;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    contain: layout style paint;
   }
 
   body::after {
@@ -167,6 +169,57 @@
     outline-color: rgb(181 126 255 / 0.2);
   }
 
+  .reveal {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1);
+    transition:
+      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal-hidden {
+    opacity: 0;
+  }
+
+  .reveal-up {
+    transform: translateY(32px) scale(0.97);
+  }
+
+  .reveal-down {
+    transform: translateY(-32px) scale(0.97);
+  }
+
+  .reveal-left {
+    transform: translateX(32px) scale(0.97);
+  }
+
+  .reveal-right {
+    transform: translateX(-32px) scale(0.97);
+  }
+
+  .reveal-visible.reveal-up,
+  .reveal-visible.reveal-down,
+  .reveal-visible.reveal-left,
+  .reveal-visible.reveal-right {
+    transform: translateX(0) translateY(0) scale(1);
+  }
+
+  .reveal-visible {
+    opacity: 1;
+  }
+
+  .scroll-snap-type-x-mandatory {
+    scroll-snap-type: x mandatory;
+  }
+
+  .scroll-snap-align-start {
+    scroll-snap-align: start;
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
   .accent-shimmer {
     background-image: linear-gradient(105deg, #ffffff 0%, #b57eff 28%, #9d4edd 50%, #ffffff 74%, #b57eff 100%);
     background-size: 220% auto;
@@ -230,6 +283,51 @@
   }
   50% {
     transform: translateY(-30px) translateX(5px);
+  }
+}
+
+@keyframes bokeh-drift-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(12px, -10px) scale(1.04);
+  }
+  50% {
+    transform: translate(-8px, -20px) scale(0.97);
+  }
+  75% {
+    transform: translate(6px, -8px) scale(1.02);
+  }
+}
+
+@keyframes bokeh-drift-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(12px, -10px) scale(1.04);
+  }
+  50% {
+    transform: translate(-8px, -20px) scale(0.97);
+  }
+  75% {
+    transform: translate(6px, -8px) scale(1.02);
+  }
+}
+
+@keyframes bokeh-drift-3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(12px, -10px) scale(1.04);
+  }
+  50% {
+    transform: translate(-8px, -20px) scale(0.97);
+  }
+  75% {
+    transform: translate(6px, -8px) scale(1.02);
   }
 }
 

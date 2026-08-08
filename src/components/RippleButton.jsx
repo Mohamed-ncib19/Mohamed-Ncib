@@ -1,4 +1,4 @@
-import { motion, useMotionValue } from 'motion/react';
+import { motion } from 'motion/react';
 import { useState } from 'react';
 
 function Ripple({ x, y, onComplete }) {
@@ -16,7 +16,6 @@ function Ripple({ x, y, onComplete }) {
 
 export default function RippleButton({ children, className, ...props }) {
   const [ripples, setRipples] = useState([]);
-  const key = useMotionValue(0);
 
   const addRipple = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();

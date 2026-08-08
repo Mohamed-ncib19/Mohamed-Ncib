@@ -27,8 +27,8 @@ export default function Contact() {
       <div className="mt-12 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         <Reveal>
           <Card className="group relative flex h-full flex-col items-center justify-center overflow-hidden p-6 text-center sm:p-8">
-            <div className="pointer-events-none absolute -top-32 -right-32 h-64 w-64 rounded-full bg-[#9D4EDD]/5 blur-3xl transition-all duration-1000 group-hover:scale-150 group-hover:bg-[#9D4EDD]/10" />
-            <div className="pointer-events-none absolute -bottom-32 -left-32 h-64 w-64 rounded-full bg-[#2F0F40]/10 blur-3xl transition-all duration-1000 group-hover:scale-150 group-hover:bg-[#2F0F40]/20" />
+            <div className="pointer-events-none absolute -top-32 -right-32 h-64 w-64 rounded-full" style={{ background: 'radial-gradient(circle, rgb(157 78 221 / 0.12) 0%, transparent 70%)' }} />
+            <div className="pointer-events-none absolute -bottom-32 -left-32 h-64 w-64 rounded-full" style={{ background: 'radial-gradient(circle, rgb(47 15 64 / 0.18) 0%, transparent 70%)' }} />
 
             <div className="relative z-10 flex flex-col items-center">
               <div className="mb-6 flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-1.5">

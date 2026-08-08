@@ -17,8 +17,8 @@ export default function ProjectCard({ project }) {
             />
           ) : (
             <div className="flex h-full flex-col justify-between overflow-hidden p-7">
-              <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#9D4EDD]/30 blur-3xl transition duration-700 group-hover:bg-[#B57EFF]/35" aria-hidden="true" />
-              <div className="absolute bottom-0 left-0 h-44 w-44 rounded-full bg-[#6B2FB8]/25 blur-3xl" aria-hidden="true" />
+              <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full" style={{ background: 'radial-gradient(circle, rgb(157 78 221 / 0.35) 0%, transparent 70%)' }} aria-hidden="true" />
+              <div className="absolute bottom-0 left-0 h-44 w-44 rounded-full" style={{ background: 'radial-gradient(circle, rgb(107 47 184 / 0.30) 0%, transparent 70%)' }} aria-hidden="true" />
               <p className="eyebrow relative">{project.visual?.label}</p>
               <div className="relative">
                 <p className="accent-shimmer-auto text-[clamp(2.4rem,7vw,5.8rem)] font-semibold leading-none tracking-[-0.08em]">

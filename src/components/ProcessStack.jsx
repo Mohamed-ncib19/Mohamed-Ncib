@@ -14,7 +14,14 @@ const steps = [
 const CARD_W = 520;
 const GAP = 32;
 const ENTRY = 0.12;
-const LOCK_MS = 700;
+const LOCK_MS = 300;
+
+const cardConfigs = steps.map((_, i) => {
+  const scaleInput = [Math.max(0, i - 1), i, Math.min(steps.length - 1, i + 1)];
+  const scaleOutput = [i === 0 ? 1 : 0.88, 1, i === steps.length - 1 ? 1 : 0.88];
+  const opacityOutput = [i === 0 ? 1 : 0.25, 1, i === steps.length - 1 ? 1 : 0.25];
+  return { scaleInput, scaleOutput, opacityOutput };
+});
 
 export default function ProcessStack() {
   const container = useRef(null);
@@ -25,13 +32,14 @@ export default function ProcessStack() {
 
   const targetIdx = useRef(0);
   const isAnimating = useRef(false);
+  const rafRef = useRef(null);
 
   const smoothTarget = useMotionValue(0);
   const smoothProgress = useSpring(smoothTarget, { stiffness: 80, damping: 25, mass: 0.8 });
   const [snappedIndex, setSnappedIndex] = useState(0);
 
   useEffect(() => {
-    return scrollYProgress.on('change', (v) => {
+    const unsub = scrollYProgress.on('change', (v) => {
       if (isAnimating.current) return;
 
       const adjusted = Math.max(0, v - ENTRY) / (1 - ENTRY);
@@ -40,14 +48,24 @@ export default function ProcessStack() {
       const clamped = Math.max(0, Math.min(steps.length - 1, rounded));
 
       if (clamped !== targetIdx.current) {
-        isAnimating.current = true;
-        targetIdx.current = clamped;
-        smoothTarget.set(clamped / (steps.length - 1));
-        setSnappedIndex(clamped);
-        setTimeout(() => { isAnimating.current = false; }, LOCK_MS);
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+
+        rafRef.current = requestAnimationFrame(() => {
+          isAnimating.current = true;
+          targetIdx.current = clamped;
+          smoothTarget.set(clamped / (steps.length - 1));
+          setSnappedIndex(clamped);
+          setTimeout(() => { isAnimating.current = false; }, LOCK_MS);
+          rafRef.current = null;
+        });
       }
     });
-  }, [scrollYProgress]);
+
+    return () => {
+      unsub();
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [scrollYProgress, smoothTarget]);
 
   const x = useTransform(smoothProgress, [0, 1], [0, -(steps.length - 1) * (CARD_W + GAP)]);
 
@@ -81,7 +99,6 @@ export default function ProcessStack() {
                 <ProcessCard
                   key={step.label}
                   index={i}
-                  total={steps.length}
                   step={step}
                   progress={smoothProgress}
                   active={i === snappedIndex}
@@ -97,26 +114,10 @@ export default function ProcessStack() {
   );
 }
 
-function ProcessCard({ index, total, step, progress, active }) {
-  const scaleInput = useMemo(
-    () => [Math.max(0, index - 1), index, Math.min(total - 1, index + 1)],
-    [index, total],
-  );
-  const scaleOutput = useMemo(
-    () => [
-      index === 0 ? 1 : 0.88,
-      1,
-      index === total - 1 ? 1 : 0.88,
-    ],
-    [index, total],
-  );
-  const opacityOutput = useMemo(
-    () => [
-      index === 0 ? 1 : 0.25,
-      1,
-      index === total - 1 ? 1 : 0.25,
-    ],
-    [index, total],
+function ProcessCard({ index, step, progress, active }) {
+  const { scaleInput, scaleOutput, opacityOutput } = useMemo(
+    () => cardConfigs[index],
+    [index],
   );
 
   const cardScale = useTransform(progress, scaleInput, scaleOutput);
@@ -170,10 +171,12 @@ function ProcessCard({ index, total, step, progress, active }) {
       </div>
 
       <motion.div
-        animate={{ opacity: active ? 0.2 : 0 }}
+        animate={{ opacity: active ? 0.35 : 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full blur-[80px]"
-        style={{ backgroundColor: step.color }}
+        className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full"
+        style={{
+          background: `radial-gradient(circle, ${step.color} 0%, transparent 70%)`,
+        }}
       />
     </motion.div>
   );
