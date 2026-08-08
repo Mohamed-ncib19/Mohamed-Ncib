@@ -19,6 +19,11 @@ module.exports = async () => {
           changeOrigin: true,
           rewrite: (p) => p.replace(/^\/notion-proxy/, ''),
         },
+        '/nvidia-api': {
+          target: 'https://integrate.api.nvidia.com',
+          changeOrigin: true,
+          rewrite: (p) => p.replace(/^\/nvidia-api/, ''),
+        },
       },
     },
     build: {

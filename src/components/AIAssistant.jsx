@@ -60,7 +60,7 @@ export default function AIAssistant() {
         { role: 'user', content: userMessage },
       ];
 
-      const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+      const response = await fetch('/nvidia-api/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -121,11 +121,13 @@ export default function AIAssistant() {
         }
       }
     } catch (error) {
+      console.error('AI Assistant error:', error);
+      const message = error?.message || 'Unknown error';
       setMessages((prev) => [
         ...prev,
         {
           role: 'assistant',
-          content: 'Sorry, I encountered an error. Please try again later or reach out directly via email.',
+          content: `Error: ${message}. Please try again later or reach out directly via email.`,
         },
       ]);
     } finally {
