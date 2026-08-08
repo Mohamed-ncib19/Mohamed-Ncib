@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Bot, User } from 'lucide-react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { MessageSquare, X, Send, Bot, User, Loader2 } from 'lucide-react';
 
 const SYSTEM_PROMPT = `You are Mohamed Ncib's AI portfolio assistant. Mohamed is a Product Strategist based in Tunisia with a background in web development and data science.
 
@@ -30,6 +30,7 @@ export default function AIAssistant() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const controllerRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -37,13 +38,41 @@ export default function AIAssistant() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, isLoading]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (controllerRef.current) {
+        controllerRef.current.abort();
+      }
+    };
+  }, []);
+
+  const parseSSE = useCallback((text) => {
+    const lines = text.split('\n');
+    const results = [];
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
+      if (!line || !line.startsWith('data: ')) continue;
+      const data = line.slice(6).trim();
+      if (data === '[DONE]') continue;
+      try {
+        const parsed = JSON.parse(data);
+        const delta = parsed.choices?.[0]?.delta || {};
+        const content = delta.content || delta.reasoning_content;
+        if (content) results.push(content);
+      } catch {
+        // skip invalid JSON
+      }
+    }
+    return results;
+  }, []);
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
@@ -52,6 +81,9 @@ export default function AIAssistant() {
     setInput('');
     setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
+
+    const controller = new AbortController();
+    controllerRef.current = controller;
 
     try {
       const apiMessages = [
@@ -74,15 +106,18 @@ export default function AIAssistant() {
           max_tokens: 1024,
           stream: true,
         }),
+        signal: controller.signal,
       });
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`API error ${response.status}: ${errorText}`);
       }
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let assistantContent = '';
+      let buffer = '';
 
       setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
 
@@ -95,43 +130,45 @@ export default function AIAssistant() {
           break;
         }
 
-        const chunk = decoder.decode(value);
-        const lines = chunk.split('\n');
+        buffer += decoder.decode(value, { stream: true });
+        const chunks = parseSSE(buffer);
 
-        for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            const data = line.slice(6).trim();
-            if (data === '[DONE]') continue;
-
-            try {
-              const parsed = JSON.parse(data);
-              const content = parsed.choices?.[0]?.delta?.content;
-              if (content) {
-                assistantContent += content;
-                setMessages((prev) => {
-                  const updated = [...prev];
-                  updated[updated.length - 1] = { role: 'assistant', content: assistantContent };
-                  return updated;
-                });
-              }
-            } catch {
-              // skip invalid JSON
-            }
-          }
+        if (chunks.length > 0) {
+          buffer = buffer.slice(buffer.indexOf(chunks[chunks.length - 1] || '') + (chunks[chunks.length - 1] || '').length);
+          assistantContent += chunks.join('');
+          setMessages((prev) => {
+            const updated = [...prev];
+            updated[updated.length - 1] = { role: 'assistant', content: assistantContent };
+            return updated;
+          });
         }
       }
+
+      if (!assistantContent.trim()) {
+        setMessages((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1] = {
+            role: 'assistant',
+            content: 'I received an empty response. Please try again or reach out via email at mohamed.ncib@polytechnicien.tn.',
+          };
+          return updated;
+        });
+      }
     } catch (error) {
-      console.error('AI Assistant error:', error);
-      const message = error?.message || 'Unknown error';
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          content: `Error: ${message}. Please try again later or reach out directly via email.`,
-        },
-      ]);
+      if (error.name !== 'AbortError') {
+        console.error('AI Assistant error:', error);
+        const message = error?.message || 'Unknown error';
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: 'assistant',
+            content: `Error: ${message}. Please try again later or reach out directly via email.`,
+          },
+        ]);
+      }
     } finally {
       setIsLoading(false);
+      controllerRef.current = null;
     }
   };
 
@@ -196,17 +233,13 @@ export default function AIAssistant() {
                   </div>
                 </div>
               ))}
-              {isLoading && messages[messages.length - 1]?.content === '' && (
+              {isLoading && (
                 <div className="flex gap-3">
                   <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#9D4EDD]/20 text-[#B57EFF]">
-                    <Bot className="h-3.5 w-3.5" />
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
                   </div>
                   <div className="rounded-2xl bg-white/[0.06] px-4 py-2.5">
-                    <div className="flex gap-1">
-                      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-white/40" style={{ animationDelay: '0s' }} />
-                      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-white/40" style={{ animationDelay: '0.1s' }} />
-                      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-white/40" style={{ animationDelay: '0.2s' }} />
-                    </div>
+                    <p className="text-xs text-white/40">Thinking...</p>
                   </div>
                 </div>
               )}
