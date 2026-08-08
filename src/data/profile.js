@@ -48,5 +48,7 @@ export const profile = {
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/mohamed-ncib-1b17b5224/', placeholder: false },
     { label: 'GitHub', href: 'https://github.com/Mohamed-ncib19', placeholder: false },
     { label: 'WhatsApp', href: 'https://wa.me/21655518492', placeholder: false },
+    { label: 'Instagram', href: 'https://www.instagram.com/kalmny.dev/', placeholder: false },
+    { label: 'Facebook', href: 'https://www.facebook.com/share/1EMqPjkvnL/?mibextid=wwXIfr', placeholder: false },
   ],
 };

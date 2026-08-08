@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'motion/react';
-import { ArrowRight, Github, Linkedin, Mail, MessageCircle } from 'lucide-react';
+import { ArrowRight, Facebook, Github, Instagram, Linkedin, Mail, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 import Card from '../components/Card.jsx';
 import ProjectCreationFlow from '../components/ProjectCreationFlow.jsx';
@@ -12,6 +12,8 @@ const iconMap = {
   LinkedIn: Linkedin,
   GitHub: Github,
   WhatsApp: MessageCircle,
+  Instagram: Instagram,
+  Facebook: Facebook,
 };
 
 export default function Contact() {
