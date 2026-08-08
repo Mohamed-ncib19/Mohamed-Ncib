@@ -91,12 +91,16 @@ export default function AIAssistant() {
           Authorization: `Bearer ${import.meta.env.VITE_NVIDIA_API_KEY}`,
         },
         body: JSON.stringify({
-          model: 'nvidia/nemotron-3-super-120b-a12b',
+          model: 'nvidia/nemotron-3-ultra-550b-a55b',
           messages: apiMessages,
           temperature: 0.7,
           top_p: 0.9,
           max_tokens: 256,
           stream: true,
+          extra_body: {
+            chat_template_kwargs: { enable_thinking: true },
+            reasoning_budget: 16384,
+          },
         }),
         signal: controller.signal,
       });
