@@ -27,7 +27,7 @@ export default function Hero() {
     <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#07070a]">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat lg:blur-none"
-        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}Hero.png)` }}
+        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}Hero.webp)` }}
       />
       <div className="absolute inset-0 bg-[#07070a]/30 lg:bg-transparent" />
 
@@ -45,7 +45,7 @@ export default function Hero() {
 
             <motion.div variants={item} className="mt-3 max-w-5xl sm:mt-2 lg:text-left">
               <TextType
-                text={['Mohamed Ncib', 'Product Designer']}
+                text={['Mohamed Ncib', 'Product Strategist']}
                 typingSpeed={75}
                 pauseDuration={2000}
                 deletingSpeed={40}

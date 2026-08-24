@@ -8,11 +8,14 @@ import LoadingScreen from './components/LoadingScreen.jsx';
 import Header from './sections/Header.jsx';
 import Footer from './sections/Footer.jsx';
 import ScrollProgress from './components/ScrollProgress.jsx';
-import AIAssistant from './components/AIAssistant.jsx';
 
 const Home = lazy(() => import('./pages/Home.jsx'));
-const CaseStudy = lazy(() => import('./pages/CaseStudy.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
+
+/** Minimum time the loader stays up, so it never flashes on a fast connection. */
+const MIN_LOADER_MS = 450;
+/** Hard cap, so a stalled font or image can never trap the visitor behind the loader. */
+const MAX_LOADER_MS = 2500;
 
 function ScrollManager() {
   const { pathname, hash } = useLocation();
@@ -55,55 +58,75 @@ function PageFallback() {
   );
 }
 
-export default function App() {
+/**
+ * Resolves once the page is genuinely usable — fonts settled and the window load
+ * event fired — floored by MIN_LOADER_MS and capped by MAX_LOADER_MS.
+ */
+function useAppReady() {
   const [ready, setReady] = useState(false);
-  const [loadingDone, setLoadingDone] = useState(false);
 
   useEffect(() => {
-    const minTime = setTimeout(() => setReady(true), 1800);
-    return () => clearTimeout(minTime);
+    let cancelled = false;
+    const startedAt = performance.now();
+
+    const finish = () => {
+      if (cancelled) return;
+      const elapsed = performance.now() - startedAt;
+      const remaining = Math.max(0, MIN_LOADER_MS - elapsed);
+      window.setTimeout(() => {
+        if (!cancelled) setReady(true);
+      }, remaining);
+    };
+
+    const windowLoaded =
+      document.readyState === 'complete'
+        ? Promise.resolve()
+        : new Promise((resolve) => window.addEventListener('load', resolve, { once: true }));
+
+    const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+    const cap = new Promise((resolve) => window.setTimeout(resolve, MAX_LOADER_MS));
+
+    Promise.race([Promise.all([windowLoaded, fontsReady]), cap]).then(finish);
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  const handleLoadingFinish = () => {
-    setLoadingDone(true);
-  };
+  return ready;
+}
 
-  const showLoading = !ready || !loadingDone;
+export default function App() {
+  const ready = useAppReady();
 
   return (
     <>
-      <AnimatePresence>
-        {showLoading && <LoadingScreen onFinish={handleLoadingFinish} />}
-      </AnimatePresence>
+      <AnimatePresence>{!ready && <LoadingScreen />}</AnimatePresence>
 
-      <div style={{ visibility: showLoading ? 'hidden' : 'visible' }}>
-        <ReactLenis root>
-          <div className="relative min-h-screen overflow-x-hidden text-foreground">
-            <Background />
-            <CursorFollower />
-            <a
-              href="#main-content"
-              className="sr-only z-[100] rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
-            >
-              Skip to content
-            </a>
-            <ScrollManager />
-            <ScrollProgress />
-            <Header />
-            <main id="main-content" className="relative z-10">
-              <Suspense fallback={<PageFallback />}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/work/:slug" element={<CaseStudy />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </main>
-            <Footer />
-            <AIAssistant />
-          </div>
-        </ReactLenis>
-      </div>
+      <ReactLenis root>
+        <div className="relative min-h-screen overflow-x-hidden text-foreground">
+          <Background />
+          <CursorFollower />
+          <a
+            href="#main-content"
+            className="sr-only z-[100] rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+          >
+            Skip to content
+          </a>
+          <ScrollManager />
+          <ScrollProgress />
+          <Header />
+          <main id="main-content" className="relative z-10">
+            <Suspense fallback={<PageFallback />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </main>
+          <Footer />
+        </div>
+      </ReactLenis>
     </>
   );
 }

@@ -1,6 +1,7 @@
 # Mohamed Ncib Portfolio
 
-Refactored Vite + React + Tailwind portfolio for Mohamed Ncib, repositioned as a product designer with former web-development experience and a subtle data-science sensibility.
+Vite + React + Tailwind portfolio for Mohamed Ncib — product strategist and developer building
+business management systems, large-scale digital ecosystems, and AI-powered products.
 
 ## Stack
 
@@ -10,92 +11,104 @@ Refactored Vite + React + Tailwind portfolio for Mohamed Ncib, repositioned as a
 - React Router
 - Motion
 - Lucide React
-- GitHub Pages via `gh-pages`
+- Netlify (static hosting + one serverless function)
 
 ## Run Locally
 
 ```bash
 npm install
-npm run dev
+npm run dev          # http://localhost:5173
 ```
+
+`npm run dev` serves the site and also mounts the project-brief endpoint at `/api/notion`
+in-process, so the submission flow behaves exactly as it does in production. The Notion
+credentials stay in the Node process — they are never exposed to the browser.
+
+### Which local server to use
+
+| Command             | Serves           | `/api/notion` | Use it for                                        |
+| ------------------- | ---------------- | ------------- | ------------------------------------------------- |
+| `npm run dev`       | source, with HMR | ✅ works      | Day-to-day building                               |
+| `npm run dev:netlify` | built output via the real Netlify runtime | ✅ works | Final check before deploying |
+| `npm run preview`   | `dist/` statically | ❌ 404       | Bundle/asset checks only                          |
+
+**`npm run preview` does not run the serverless function** — it is Vite's static file server,
+so `/api/notion` returns 404 and the project-brief flow appears broken. That is a limitation of
+the preview server, not of the site. Use `npm run dev:netlify` when you want to confirm the
+deployed behaviour: it applies `netlify.toml` redirects and executes the function exactly as
+Netlify will. (`--offline` keeps it on your local `.env` rather than pulling the linked site's
+environment variables.)
 
 ## Verify
 
 ```bash
-npm dedupe
 npm run lint
 npm run build
-npm audit
 ```
 
-The lint command enforces `--max-warnings 0`.
+The lint command enforces `--max-warnings 0` across `src` and `netlify`.
+
+## Environment
+
+Copy `.env.example` to `.env` and fill it in. **Nothing here is prefixed with `VITE_`, and
+nothing here should be** — Vite inlines every `VITE_`-prefixed variable into the public bundle,
+so a `VITE_`-prefixed secret is a published secret.
+
+| Variable                                                                                                    | Required | Purpose                                                     |
+| ----------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------- |
+| `NOTION_TOKEN`                                                                                              | yes      | Notion internal integration secret                          |
+| `NOTION_DATABASE_ID`                                                                                        | yes      | Target database for incoming project briefs                 |
+| `NOTION_PROP_ARCHETYPE`, `NOTION_PROP_OBJECTIVE`, `NOTION_PROP_RESOURCES`, `NOTION_PROP_TIMELINE`, `NOTION_PROP_CONTACT` | no       | Map each answer to a column **by name** (strongly recommended) |
+
+Without the `NOTION_PROP_*` map the function falls back to filling select columns in declared
+order. Notion does not guarantee property order, so answers can land in the wrong columns —
+set the names.
+
+For the deployed site, add the same variables under **Netlify → Site settings → Environment
+variables**.
 
 ## Deploy
 
-The repository deploy target is a GitHub project page named `Mohamed-Ncib`.
+Netlify, from `netlify.toml`:
 
-Important deploy settings:
+- `npm run build` → `dist`
+- Functions in `netlify/functions`
+- `/api/notion` rewrites to the function. This rule is declared **before** the SPA catch-all;
+  Netlify applies the first match, so moving it below `/*` would return `index.html` for API
+  calls and silently break submissions.
+- `/*` → `/index.html` for client-side routing.
 
-- Vite `base` is `/Mohamed-Ncib/` in `vite.config.js`.
-- `BrowserRouter` uses `basename={import.meta.env.BASE_URL}` in `src/main.jsx`.
-- `public/404.html` redirects deep links back into the SPA so refreshes on `/work/:slug` do not dead-end on GitHub Pages.
-
-Deploy command:
-
-```bash
-npm run deploy
-```
-
-If deploying to Netlify or a custom domain root, change `base` to `/`, update `homepage`, and replace the GitHub Pages 404 strategy with the host's rewrite rule.
-
-## Structure
+## Architecture
 
 ```text
+netlify/functions/
+  notion.js      server-side Notion proxy — holds the token, handles CORS
 src/
-  components/   reusable UI primitives
-  data/         profile, projects, skills, testimonials, posts
-  lib/          cn helper and theme hook
-  pages/        Home, CaseStudy, NotFound
-  sections/     Header, Hero, About, Work, Skills, Testimonials, Journal, Contact, Footer
-  styles/       global Tailwind layers and CSS variables
+  components/    reusable UI primitives and modals
+  data/          profile.js (bio, socials, stats), work.js (showcase content)
+  lib/           cn helper, useModal (focus trap), notion client
+  pages/         Home, NotFound
+  sections/      Header, Hero, About, Work, Showcase, Contact, Footer
+  styles/        global Tailwind layers and CSS variables
 ```
+
+### Why the Notion call is server-side
+
+`api.notion.com` sends no CORS headers, so a browser can never call it directly. Routing
+through the function fixes that *and* keeps the integration token off the client. The client
+half (`src/lib/notion.js`) only knows how to POST to our own origin.
 
 ## Content Editing
 
-Most content is data-driven:
+- Bio, stats, social links, CV: `src/data/profile.js`
+- Work showcase categories and projects: `src/data/work.js`
+- Journey timeline: the `entries` array in `src/sections/Work.jsx`
 
-- Profile and social links: `src/data/profile.js`
-- Work and case studies: `src/data/projects.js`
-- Skills: `src/data/skills.js`
-- Testimonials: `src/data/testimonials.js`
-- Journal posts: `src/data/posts.js`
+## Assets
 
-## Contact Form
-
-The chosen lightweight backend is Formspree.
-
-Set a real endpoint before launch:
-
-```bash
-VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
-```
-
-Until this is set, the form opens a pre-filled email fallback to Mohamed's address and displays a placeholder backend message.
-
-## Owner Placeholder Checklist
-
-- Replace `src/assets/ME.png` with the final approved headshot.
-- Replace `src/assets/PDF/Mohamed_Ncib_Resume_English.pdf` with the final CV PDF.
-- Replace all `PLACEHOLDER` project copy, metrics, and outcomes in `src/data/projects.js`.
-- Replace project screenshots with approved real case-study imagery.
-- Replace testimonials in `src/data/testimonials.js` with approved real quotes.
-- Replace the Dribbble placeholder URL in `src/data/profile.js` or remove it.
-- Confirm LinkedIn, GitHub, email, phone, and WhatsApp URLs.
-- Set `VITE_FORMSPREE_ENDPOINT` to a real Formspree endpoint.
-- Replace `G-XXXXXXXXXX` in the commented GA4 snippet in `index.html` before enabling analytics.
-- Replace `public/og-image.svg` if a custom branded social card is produced.
-
-## Notes
-
-- `REFACTOR-NOTES.md` documents dependency keep/remove decisions and bundle-size changes.
-- `STYLE-GUIDE.md` documents tokens, typography, components, motion, accessibility, and theming.
+- `public/Hero.webp` — hero and About portrait (2560px, ~59 KB). The 6.85 MB PNG original is
+  archived at `src/assets/originals/Hero.png`, outside the deploy path.
+- `public/og-image.png` — 1200×630 social card.
+- `src/assets/` still holds project screenshots from an earlier version of the site. Nothing
+  imports them, so they add nothing to the bundle — but they do add ~11 MB to a clone. Delete
+  them once you are sure they are not needed for future case studies.

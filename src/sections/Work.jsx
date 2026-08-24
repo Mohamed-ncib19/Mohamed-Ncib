@@ -1,5 +1,3 @@
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal.jsx';
 
 const entries = [
@@ -73,28 +71,6 @@ export default function Work() {
         </div>
       </div>
 
-      {/* CTA */}
-      <Reveal delay={0.2}>
-          <div className="relative mt-20 overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.03] p-6 sm:p-8 lg:p-10">
-            <div className="pointer-events-none absolute -top-20 -right-20 h-40 w-40 rounded-full" style={{ background: 'radial-gradient(circle, rgb(157 78 221 / 0.18) 0%, transparent 70%)' }} />
-            <div className="pointer-events-none absolute -bottom-20 -left-20 h-40 w-40 rounded-full" style={{ background: 'radial-gradient(circle, rgb(47 15 64 / 0.25) 0%, transparent 70%)' }} />
-
-          <div className="relative">
-            <p className="max-w-2xl text-sm leading-7 text-white/60 sm:text-base sm:leading-8">
-              Interested in the technical details, challenges, architecture decisions, or client results?
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                to="/#contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-[rgb(22_10_27)] px-6 py-2.5 text-sm font-semibold text-white/85 shadow-[0_0_30px_-8px_#7d5493] shadow-[inset_0_1px_0_rgb(255_255_255_/_0.12)] backdrop-blur-xl transition-all duration-300 hover:brightness-125 hover:-translate-y-0.5 hover:shadow-[0_0_50px_-4px_#7d5493]"
-              >
-                Let&apos;s talk
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </Reveal>
     </section>
   );
 }

@@ -13,7 +13,11 @@ export default function CursorFollower() {
   }, [mouseX, mouseY]);
 
   useEffect(() => {
-    window.addEventListener('mousemove', move);
+    // The dot only renders on large, fine-pointer screens — don't pay for the
+    // listener anywhere else.
+    if (!window.matchMedia('(pointer: fine)').matches) return undefined;
+
+    window.addEventListener('mousemove', move, { passive: true });
     return () => window.removeEventListener('mousemove', move);
   }, [move]);
 

@@ -1,7 +1,10 @@
 import { motion } from 'motion/react';
 import { Download, ExternalLink, X } from 'lucide-react';
+import useModal from '../lib/useModal.js';
 
 export default function PDFViewerModal({ pdfUrl, onClose }) {
+  const dialogRef = useModal(onClose);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -13,6 +16,10 @@ export default function PDFViewerModal({ pdfUrl, onClose }) {
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
 
       <motion.div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="CV — Mohamed Ncib"
         initial={{ opacity: 0, scale: 0.95, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 30 }}
@@ -52,6 +59,7 @@ export default function PDFViewerModal({ pdfUrl, onClose }) {
             <button
               type="button"
               onClick={onClose}
+              aria-label="Close CV"
               className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/40 transition hover:border-white/20 hover:bg-white/[0.07] hover:text-white/70"
             >
               <X className="h-3.5 w-3.5" />

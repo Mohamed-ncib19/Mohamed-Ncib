@@ -2,6 +2,24 @@ import { motion } from 'motion/react';
 import { ArrowLeft, Check, ChevronRight, Loader, Send, X } from 'lucide-react';
 import { useState } from 'react';
 import { createNotionPage } from '../lib/notion.js';
+import useModal from '../lib/useModal.js';
+
+// Deliberately permissive: this is a lead form, so it should catch typos without
+// rejecting the many legitimate shapes an address or international number takes.
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const PHONE_PATTERN = /^\+?[\d\s().-]{6,20}$/;
+
+function validateContact(value, type) {
+  const trimmed = value.trim();
+  if (!trimmed) return 'Please leave a contact so I can reach you.';
+  if (type === 'email' && !EMAIL_PATTERN.test(trimmed)) {
+    return 'That does not look like a valid email address.';
+  }
+  if (type === 'phone' && !PHONE_PATTERN.test(trimmed)) {
+    return 'That does not look like a valid phone number.';
+  }
+  return '';
+}
 
 const archetypes = [
   { id: 'startup', label: 'Startup Founder', tag: 'Builder', desc: 'Growth. Speed. Validation.', emoji: '🚀' },
@@ -197,6 +215,7 @@ export default function ProjectCreationFlow({ onClose }) {
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState('');
+  const dialogRef = useModal(onClose);
 
   const hasValue = [
     projectName.trim().length > 0,
@@ -220,11 +239,20 @@ export default function ProjectCreationFlow({ onClose }) {
 
   const advance = () => {
     if (!canAdvance()) return;
+
     if (step < steps.length - 1) {
+      setError('');
       setStep((s) => s + 1);
-    } else {
-      handleSubmit();
+      return;
     }
+
+    const contactError = validateContact(contact, contactType);
+    if (contactError) {
+      setError(contactError);
+      return;
+    }
+
+    handleSubmit();
   };
 
   const handleSubmit = async () => {
@@ -278,6 +306,7 @@ export default function ProjectCreationFlow({ onClose }) {
               <input
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
+                aria-label="Project name"
                 placeholder="e.g. Nexa, Vault, Aether..."
                 onKeyDown={(e) => e.key === 'Enter' && advance()}
                 className="h-16 w-full rounded-2xl border border-white/[0.07] bg-white/[0.02] pl-12 pr-5 text-xl font-display font-medium tracking-[-0.02em] text-white outline-none transition focus:border-[#9D4EDD]/40 focus:bg-white/[0.04] placeholder:text-white/15"
@@ -358,7 +387,7 @@ export default function ProjectCreationFlow({ onClose }) {
                 <button
                   key={type}
                   type="button"
-                  onClick={() => { setContactType(type); setContact(''); }}
+                  onClick={() => { setContactType(type); setContact(''); setError(''); }}
                   className={`flex-1 rounded-xl border py-3 text-center text-sm font-semibold transition-all duration-300 ${
                     contactType === type
                       ? 'border-[#9D4EDD]/50 bg-[#9D4EDD]/10 text-white shadow-[0_0_20px_-10px_rgb(157_78_221_/_0.4)]'
@@ -372,7 +401,11 @@ export default function ProjectCreationFlow({ onClose }) {
             <label className="relative block">
               <input
                 value={contact}
-                onChange={(e) => setContact(e.target.value)}
+                onChange={(e) => { setContact(e.target.value); if (error) setError(''); }}
+                type={contactType === 'email' ? 'email' : 'tel'}
+                inputMode={contactType === 'email' ? 'email' : 'tel'}
+                autoComplete={contactType === 'email' ? 'email' : 'tel'}
+                aria-label={contactType === 'email' ? 'Your email address' : 'Your phone number'}
                 placeholder={contactType === 'email' ? 'your@email.com' : '+1 234 567 890'}
                 onKeyDown={(e) => e.key === 'Enter' && advance()}
                 className="h-14 w-full rounded-2xl border border-white/[0.07] bg-white/[0.02] px-5 text-base text-white outline-none transition focus:border-[#9D4EDD]/40 focus:bg-white/[0.04] placeholder:text-white/15"
@@ -390,6 +423,10 @@ export default function ProjectCreationFlow({ onClose }) {
   if (done) {
     return (
       <motion.div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Project submitted"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -422,6 +459,10 @@ export default function ProjectCreationFlow({ onClose }) {
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
 
       <motion.div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Start a project"
         initial={{ opacity: 0, scale: 0.95, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 30 }}
@@ -436,6 +477,7 @@ export default function ProjectCreationFlow({ onClose }) {
           <button
             type="button"
             onClick={onClose}
+            aria-label="Close"
             className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/40 transition hover:border-white/20 hover:text-white/70"
           >
             <X className="h-4 w-4" />
@@ -450,7 +492,7 @@ export default function ProjectCreationFlow({ onClose }) {
               <p className="font-display text-2xl font-medium tracking-[-0.03em] text-white">{steps[step].title}</p>
               <p className="mb-5 mt-1 text-sm text-white/40">{steps[step].subtitle}</p>
               {renderStep()}
-              {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
+              {error && <p role="alert" className="mt-3 text-sm text-red-400">{error}</p>}
             </motion.div>
           </div>
         </div>
