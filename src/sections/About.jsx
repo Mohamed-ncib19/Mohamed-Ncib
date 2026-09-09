@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Chip from '../components/Chip.jsx';
 import PDFViewerModal from '../components/PDFViewerModal.jsx';
 import Reveal from '../components/Reveal.jsx';
-import ProcessStack from '../components/ProcessStack.jsx';
+import ProcessTimeline from '../components/ProcessTimeline.jsx';
 import { profile } from '../data/profile.js';
 
 export default function About() {
@@ -13,17 +13,9 @@ export default function About() {
   return (
     <>
       <section id="about" className="section-shell scroll-mt-24">
-        {/* Image — mobile only */}
-        <div className="lg:hidden">
-          <div
-            className="mb-8 h-48 w-full rounded-2xl border border-white/[0.06] bg-cover bg-center"
-            style={{ backgroundImage: `url(${import.meta.env.BASE_URL}Hero.png)` }}
-          />
-        </div>
-
-        {/* Bio + chips */}
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-12">
-          <div>
+        {/* Bio + portrait */}
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-14">
+          <div className="order-2 lg:order-1">
             <Reveal>
               <p className="eyebrow mb-3">About</p>
               <h2 className="font-display text-3xl font-medium tracking-[-0.04em] text-white sm:text-4xl">
@@ -51,6 +43,15 @@ export default function About() {
               </button>
             </Reveal>
           </div>
+
+          <Reveal delay={0.06} className="order-1 lg:order-2">
+            <div
+              className="h-48 w-full rounded-2xl border border-white/[0.06] bg-cover bg-center shadow-[0_30px_80px_-45px_rgb(157_78_221_/_0.9)] sm:h-64 lg:h-[26rem]"
+              style={{ backgroundImage: `url(${import.meta.env.BASE_URL}Hero.webp)` }}
+              role="img"
+              aria-label="Portrait of Mohamed Ncib"
+            />
+          </Reveal>
         </div>
 
         {/* Stats */}
@@ -67,7 +68,7 @@ export default function About() {
         </Reveal>
       </section>
 
-      <ProcessStack />
+      <ProcessTimeline />
 
       <AnimatePresence>
         {cvOpen && (

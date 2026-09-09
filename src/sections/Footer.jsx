@@ -13,7 +13,7 @@ export default function Footer() {
           </span>
           <span>Mohamed Ncib</span>
         </Link>
-        <p>(c) {year} Mohamed Ncib. Designed as a product-designer portfolio.</p>
+        <p>&copy; {year} Mohamed Ncib. Product strategy, systems, and AI-powered products.</p>
       </div>
     </footer>
   );

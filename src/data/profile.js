@@ -1,7 +1,5 @@
 import cvPdf from '../assets/PDF/Mohamed_Ncib_Resume_English.pdf';
 
-const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/PLACEHOLDER_FORM_ID';
-
 export const profile = {
   name: 'Mohamed Ncib',
   firstName: 'Mohamed',
@@ -17,14 +15,8 @@ export const profile = {
     'Market intelligence, product vision, and cross-functional execution, I connect the dots to turn opportunities into shipped products. Currently studying Data Science & AI to sharpen strategic decisions.',
   cv: {
     href: cvPdf,
-    fileName: 'Mohamed_Ncib_CV_PLACEHOLDER.pdf',
+    fileName: 'Mohamed_Ncib_Resume_English.pdf',
     label: 'Download CV',
-    placeholderNote: 'PLACEHOLDER CV PDF. Replace the file in src/assets/PDF before final publishing.',
-  },
-  contact: {
-    formEndpoint: formspreeEndpoint,
-    isBackendPlaceholder: formspreeEndpoint.includes('PLACEHOLDER'),
-    backendNote: 'PLACEHOLDER contact backend. Set VITE_FORMSPREE_ENDPOINT to a real Formspree endpoint.',
   },
   pillars: [
     { number: '01', title: 'Market Intelligence', description: 'Competitive analysis, trend forecasting, and opportunity identification' },

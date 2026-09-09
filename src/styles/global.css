@@ -19,22 +19,6 @@
     --ring: 268 100% 75%;
   }
 
-  .dark {
-    color-scheme: dark;
-    --background: 240 4% 4%;
-    --foreground: 260 33% 96%;
-    --card: 0 0% 100%;
-    --card-foreground: 260 33% 96%;
-    --muted: 254 17% 15%;
-    --muted-foreground: 256 18% 76%;
-    --border: 0 0% 100%;
-    --accent: 279 72% 59%;
-    --accent-foreground: 0 0% 100%;
-    --secondary: 268 100% 75%;
-    --secondary-foreground: 240 20% 5%;
-    --ring: 268 100% 75%;
-  }
-
   * {
     @apply border-border;
   }
@@ -244,6 +228,137 @@
   @media (hover: hover) {
     .accent-shimmer:hover {
       animation: shimmer 1.8s ease both;
+    }
+  }
+
+  /* --- Work showcase --- */
+
+  .work-tab {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    border-radius: 0.9rem;
+    border: 1px solid transparent;
+    padding: 0.7rem 0.95rem;
+    color: rgb(255 255 255 / 0.45);
+    transition: color 0.35s ease, background-color 0.35s ease, border-color 0.35s ease;
+  }
+
+  .work-tab__bar {
+    margin-top: 0.15rem;
+    height: 1.6rem;
+    width: 2px;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.1);
+    transition: background-color 0.35s ease, height 0.35s ease;
+  }
+
+  .work-tab__index {
+    color: rgb(255 255 255 / 0.25);
+    transition: color 0.35s ease;
+  }
+
+  .work-tab.is-active {
+    border-color: rgb(var(--accent) / 0.25);
+    background: rgb(var(--accent) / 0.07);
+    color: rgb(255 255 255 / 0.95);
+  }
+
+  .work-tab.is-active .work-tab__bar {
+    background: rgb(var(--accent) / 0.9);
+  }
+
+  .work-tab.is-active .work-tab__index {
+    color: rgb(var(--accent) / 0.95);
+  }
+
+  @media (hover: hover) {
+    .work-tab:not(.is-active):hover {
+      background: rgb(255 255 255 / 0.03);
+      color: rgb(255 255 255 / 0.75);
+    }
+
+    .work-tab:not(.is-active):hover .work-tab__bar {
+      background: rgb(255 255 255 / 0.25);
+    }
+  }
+
+  .work-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.07);
+    background:
+      linear-gradient(160deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.012) 55%, transparent),
+      rgb(255 255 255 / 0.012);
+    transition:
+      border-color 0.45s ease,
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.45s ease;
+  }
+
+  .work-card__glow {
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    height: 16rem;
+    width: 16rem;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgb(var(--accent) / 0.16) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.55s ease;
+  }
+
+  .work-card__kind {
+    color: rgb(var(--accent) / 0.75);
+  }
+
+  .work-facet {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 9999px;
+    border: 1px solid rgb(255 255 255 / 0.06);
+    background: rgb(255 255 255 / 0.025);
+    padding: 0.3rem 0.7rem;
+    font-size: 0.72rem;
+    line-height: 1.1;
+    color: rgb(255 255 255 / 0.45);
+    transition: border-color 0.4s ease, color 0.4s ease;
+  }
+
+  .work-facet__dot {
+    height: 0.25rem;
+    width: 0.25rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: rgb(var(--accent) / 0.7);
+  }
+
+  @media (hover: hover) {
+    .work-card:hover {
+      transform: translateY(-4px);
+      border-color: rgb(var(--accent) / 0.32);
+      box-shadow:
+        0 24px 60px -32px rgb(var(--accent) / 0.55),
+        inset 0 1px 0 rgb(255 255 255 / 0.06);
+    }
+
+    .work-card:hover .work-card__glow {
+      opacity: 1;
+    }
+
+    .work-card:hover .work-facet {
+      border-color: rgb(255 255 255 / 0.1);
+      color: rgb(255 255 255 / 0.6);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .work-card,
+    .work-card:hover {
+      transform: none;
     }
   }
 }

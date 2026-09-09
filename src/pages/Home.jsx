@@ -1,6 +1,7 @@
 import About from '../sections/About.jsx';
 import Contact from '../sections/Contact.jsx';
 import Hero from '../sections/Hero.jsx';
+import Showcase from '../sections/Showcase.jsx';
 import Work from '../sections/Work.jsx';
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       <Hero />
       <About />
       <Work />
+      <Showcase />
       <Contact />
     </>
   );
