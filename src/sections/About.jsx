@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Chip from '../components/Chip.jsx';
 import PDFViewerModal from '../components/PDFViewerModal.jsx';
 import Reveal from '../components/Reveal.jsx';
-import ProcessStack from '../components/ProcessStack.jsx';
+import ProcessTimeline from '../components/ProcessTimeline.jsx';
 import { profile } from '../data/profile.js';
 
 export default function About() {
@@ -68,7 +68,7 @@ export default function About() {
         </Reveal>
       </section>
 
-      <ProcessStack />
+      <ProcessTimeline />
 
       <AnimatePresence>
         {cvOpen && (
